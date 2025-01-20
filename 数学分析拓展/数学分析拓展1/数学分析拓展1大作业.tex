@@ -1,0 +1,2747 @@
+%  author: Donny SHEN 
+%  Class: MATH 2102
+%  Complete Date: 2025.01.21
+%  Last Modification: 2025.01.21
+
+\documentclass[12pt]{ctexart}
+
+% 宏包加载
+\usepackage{tikz}
+\usepackage{newtxtext, geometry, amsmath, amssymb}
+\usepackage{amsthm}
+\usepackage{xpatch}
+\usepackage[strict]{changepage}
+\usepackage{multicol}
+\usepackage{pdfpages}
+\usepackage[fontsize=14pt]{fontsize}
+\usepackage{esvect}
+\usepackage{xcolor} % 加载颜色宏包
+\usepackage{tocloft} % 自定义目录样式
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,  % 禁用超链接的颜色
+    pdfborder={0 0 0}  % 移除超链接的边框
+}
+\newtheorem{proposition}{命题}
+
+\tcbuselibrary{most}
+% 加载文献引用所需宏包
+\usepackage[backend=biber,style=gb7714-2015,citestyle=numeric-comp,gbalign=gb7714-2015]{biblatex}
+\addbibresource{references.bib}
+\newtheorem*{lemma}{引理}
+\newtheorem*{theorem}{定理}
+\geometry{
+    a4paper,         % 使用 A4 纸
+    left=1.5cm,        % 左边距
+    right=1.5cm,       % 右边距
+    top=2.5cm,       % 上边距
+    bottom=2.5cm     % 下边距
+}
+
+\renewcommand{\contentsname}{\hfill\centering\zihao{2} 目录\hfill~}
+
+\begin{document}
+\title{数学分析拓展3大作业} % 文档标题
+\newpage
+\tableofcontents % 生成目录
+\newpage
+
+
+% 第一部分：作业题整理
+\section{第一部分：作业题整理} % 无编号的 section
+\setcounter{section}{1} % 手动设置章节编号为 1
+\setcounter{subsection}{0} % 手动设置章节编号为 1
+\subsection{集合与映射作业题} 
+\subsubsection*{1.1.1}
+试证：映射左可逆当且仅当它是单射;右可逆当且仅当它是满射
+
+\begin{proof}
+(1) 设 $f$ 映射左可逆，当且仅当它是单射。
+
+\noindent
+(a) 必要性：设 $g$ 是 $f$ 的左逆，则对 $\forall t \in T$，有 $g(f(t)) = t$。  
+即 $g \circ f = I_T = I_T(t)$。有 $g \circ f = I_T$，而 $I_T$ 是双射，故 $f$ 是单射。
+
+\noindent
+(b) 充分性：定义 $g: S \to T$ 如下 $g(s) = t_1, \; s \in f(T)$ 且 $f(t_1) = s$。  
+对每个 $s \in S$，$g(s)$ 只有一个值，且若 $f(t_1) = s$，因 $g \circ f(t_1) = g(s) = t$。
+
+\noindent
+故 $g$ 是 $f$ 的左逆。
+
+(2) 右可逆当且仅当它是满射。
+
+\noindent
+(a) 必要性：设 $g$ 是 $f$ 的右逆，则对 $\forall s \in S$，有 $f(g(s)) = s$。  
+有 $f \circ g = I_S$，而 $I_S$ 是双射，故 $f$ 是满射。
+
+\noindent
+(b) 充分性：若 $f$ 是满射，则对任意 $s \in S$，至少存在一个 $t \in T$，使得 $f(t) = s$。  
+定义 $g: S \to T$ 如下，对每个 $s \in S$，有：
+\begin{enumerate}
+    \item 若只有一个 $t \in T$ 使得 $f(t) = s$，令 $g(s) = t$。
+    \item 若有 $t_1, t_2, \ldots, t_n \in T$，使得 $f(t_1) = f(t_2) = \cdots = f(t_n) = s$，则取某一个 $t_i$，令 $g(s) = t_i$。
+\end{enumerate}
+这样，对每个 $s \in S$，$g(s)$ 只有一个值，且 $f(g(s)) = s$。  
+故 $g$ 是 $f$ 的右逆。
+
+\end{proof}
+
+\subsubsection*{1.1.2} 
+试证：全体有理数是可数的。
+\begin{proof}
+我们先证明 $[0, 1)$ 中全体有理数是可数的。显然，排列
+\[
+0, \; \frac{1}{2}, \; \frac{1}{3}, \; \frac{2}{3}, \; \frac{1}{4}, \; \frac{2}{4}, \;\frac{3}{4}, \ldots
+\]
+这样就列举出了 $[0, 1)$ 中的所有有理数。我们把这些数重新排列：从第一行开始，从左到右排列成
+\[
+0, \; \frac{1}{2}, \; \frac{1}{3}, \; \frac{2}{3}, \; \frac{1}{4}, \; \frac{3}{4}, \ldots
+\]
+然后剔除重复的数，可得列出的就是 $[0, 1)$ 中有理数的全集。
+
+很明显，当有理数 $r \in [0, 1)$ 时，对任何整数 $n$，映射 $r \to r + n$ 是 $[0, 1)$ 中的有理数和 $[n, n+1)$ 中的有理数之间的一一对应。  
+因此，$[n, n+1)$ 的全体有理数也是可数的。
+
+这样，上述全体有理数可以表示为
+\[
+\bigcup_{n=-\infty}^{\infty} \{x : x \in [n, n+1), \; x \in \mathbb{Q}\},
+\]
+这是可数个互不相交的可数集的并。
+
+因此，全体有理数是可数的。
+\end{proof}
+
+\subsubsection*{1.1.3} 
+试证：可数个至多可数集的并集是至多可数的。
+\begin{proof}
+设意即为 $S = \bigcup E_n \; (n = 1, 2, 3, \ldots)$ 是一列至多可数集。
+
+令 $S = \bigcup E_n$，那么 $S$ 是至多可数集。  
+不妨对每个 $n \in \mathbb{N}^*$，$E_n = \{x_{n1}, x_{n2}, \ldots, x_{nk}, \ldots\}$。
+
+考虑下列无限矩阵列：
+\[
+\begin{array}{ccccccc}
+x_{11}, & x_{12}, & x_{13}, & x_{14}, & \ldots \\
+x_{21}, & x_{22}, & x_{23}, & x_{24}, & \ldots \\
+x_{31}, & x_{32}, & x_{33}, & x_{34}, & \ldots \\
+x_{41}, & x_{42}, & x_{43}, & x_{44}, & \ldots \\
+\vdots & \vdots & \vdots & \vdots & \ddots \\
+\end{array}
+\]
+
+其中第 $n$ 行由 $E_n$ 的元素组成，这个矩阵列包含 $S$ 中的所有元素。
+
+按照简单指示图的那样，这些元素可以排成一行：
+\[
+x_{11}, \; x_{12}, \; x_{21}, \; x_{13}, \; x_{22}, \; x_{31}, \; x_{14}, \; x_{23}, \; x_{32}, \; x_{41}, \; \ldots
+\]
+
+当两个集合 $E_i$ 和 $E_j$ 有公共元素时，这些元素在这一行中会重复出现。  
+我们从左到右顺次，重复元素仅保留第一次出现的那个。
+
+这样以后，得到的单集合 $S$ 即为 $S$ 的所有元素。  
+因此，$S$ 是至多可数的。
+\end{proof}
+
+\subsubsection*{1.1.4} 
+试构造一个开区间 $(0, 1)$ 与闭区间 $[0, 1]$ 之间的一一对应。
+\begin{proof}
+我们构造下面函数从 $[0, 1]$ 到 $(0, 1)$ 上的映射 $f$：
+
+\[
+f(x) =
+\begin{cases} 
+\frac{1}{2}, & \text{当 } x = 0 \text{ 时}, \\
+\frac{1}{n+2}, & \text{当 } x = \frac{1}{n} \text{ 时 } (n \in \mathbb{N}^*), \\
+x, & \text{当 } x \notin \{\frac{1}{n} \mid n \in \mathbb{N}^*\} \text{ 时}.
+\end{cases}
+\]
+
+显然，$f$ 是 $(0, 1)$ 与 $[0, 1]$ 之间的一一对应关系。
+\end{proof}
+
+\subsubsection*{1.1.5} 
+试证：每个无限集与自身的一个真子集对等。
+\begin{proof}
+因为有限集是不存在自反真子集对等的，若证明 $A$ 为无限集的充要条件为 $A$ 与其某真子集对等，即可证明题目。
+
+\begin{enumerate}
+    \item 充分性：因为有限集不存在真子集对等，故充要性显然成立。
+    \item 必要性：取 $A$ 中一个非空有限子集 $B$。显然，有 $A \sim (A \setminus B)$，即得必要性。
+\end{enumerate}
+
+故每个无限集都与自身的一个真子集对等。
+\end{proof}
+
+\subsection{数列极限作业题}
+\subsubsection*{1.2.1} 
+设 $a > 0$。求极限 $\lim_{n \to \infty} \sqrt[n]{a}$ 和 $\lim_{n \to \infty} \frac{a^n}{n!}$。
+\begin{proof}
+\textbf{(1) 证明 $\lim_{n \to \infty} \sqrt[n]{a} = 1$：}
+
+1. 当 $a = 1$ 时，显然存在 $\lim_{n \to \infty} \sqrt[n]{a} = \lim_{n \to \infty} \sqrt[n]{1} = 1$。
+
+2. 当 $a > 1$ 时，记 $a^{1/n} = 1 + d_n$，则 $d_n > 0$。  
+由 $a = (1 + d_n)^n = 1 + n d_n + \frac{n(n-1)}{2} d_n^2 + \cdots$，得：
+\[
+d_n = a^{1/n} - 1 \leq \frac{\ln a}{n}.
+\]
+显然，当 $n \to \infty$ 时，$a^{1/n} \to 1$。
+
+3. 当 $0 < a < 1$ 时，令 $\frac{1}{a} > 1$，同理可得 $\lim_{n \to \infty} \sqrt[n]{a} = 1$。
+
+综上，$\lim_{n \to \infty} \sqrt[n]{a} = 1$。
+
+\textbf{(2) 证明 $\lim_{n \to \infty} \frac{a^n}{n!} = 0$：}
+
+1. 当 $a \neq 0$ 时，设 $k = \lfloor |a| \rfloor + 1$，表示不大于 $|a|$ 的整数加 $1$，  
+则：
+\[
+\frac{a^n}{n!} = \frac{|a|^n}{1 \cdot 2 \cdot \cdots \cdot n} \leq \frac{k}{n \cdot n \cdot \cdots \cdot n}.
+\]
+
+2. 对于任意给定的 $\varepsilon > 0$，取 $N = \max\{k, \frac{k |a|}{\varepsilon}\}$，  
+当 $n > N$ 时，有：
+\[
+\frac{a^n}{n!} \leq k \cdot \frac{|a|}{n!} < \varepsilon.
+\]
+
+故 $\lim_{n \to \infty} \frac{a^n}{n!} = 0$。
+
+\textbf{综上：}
+\[
+\lim_{n \to \infty} \sqrt[n]{a} = 1, \quad \lim_{n \to \infty} \frac{a^n}{n!} = 0.
+\]
+\end{proof}
+
+\subsubsection*{1.2.2} 
+已知 $\lim_{n \to \infty} a_n = a$，试证
+\[
+\lim_{n \to \infty} \frac{a_1 + a_2 + \cdots + a_n}{n} = \lim_{n \to \infty} \frac{\lfloor na_n \rfloor}{n} = a，
+\]
+此处方括号表示取整函数。
+\begin{proof}
+\textbf{(1) 证明 $\lim_{n \to \infty} \frac{a_1 + a_2 + \cdots + a_n}{n} = a$：}
+
+已知 $\lim_{n \to \infty} a_n = a$，即对于任意 $\varepsilon > 0$，存在 $m \in \mathbb{N}$，当 $n > m$ 时，有 $|a_n - a| < \varepsilon$。
+
+取自然数 $m$，设 $|a_1 - a| + |a_2 - a| + \cdots + |a_m - a| = A$ 是正数，  
+已知 $\lim_{n \to \infty} \frac{A}{n} = 0$，即对于上述同样的 $\varepsilon > 0$，存在 $N \in \mathbb{N}^*$ 且 $N > m$，当 $n > N$ 时，有 $\frac{A}{n} < \varepsilon$。
+
+从而有：
+\[
+\left| \frac{a_1 + a_2 + \cdots + a_n}{n} - a \right| = \left| \frac{(a_1 - a) + (a_2 - a) + \cdots + (a_n - a)}{n} \right| 
+\] 
+\[
+\leq \frac{|a_1 - a| + |a_2 - a| + \cdots + |a_m - a|}{n} + \frac{|a_{m+1} - a| + \cdots + |a_n - a|}{n}.
+\]
+前一项小于 $\frac{A}{n}$，后一项小于 $\varepsilon$，因此：
+\[
+\frac{A}{n} + \frac{n-m}{n} \varepsilon < \varepsilon + \varepsilon = 2\varepsilon。
+\]
+由 $\varepsilon$ 的任意性，可得 $\lim_{n \to \infty} \frac{a_1 + a_2 + \cdots + a_n}{n} = a$。
+
+\textbf{(2) 证明 $\lim_{n \to \infty} \frac{\lfloor na_n \rfloor}{n} = a$：}
+
+因为 $|\lfloor na_n \rfloor - na_n| < 1$，故：
+\[
+\lim_{n \to \infty} \frac{\lfloor na_n \rfloor - na_n}{n} = 0。
+\]
+
+又有：
+\[
+\left| \frac{\lfloor na_n \rfloor}{n} - a \right| = \left| \frac{\lfloor na_n \rfloor - na_n}{n} + \frac{na_n}{n} - a \right|
+\leq \frac{|\lfloor na_n \rfloor - na_n|}{n} + |a_n - a|。
+\]
+
+因为 $\lim_{n \to \infty} a_n = a$，有 $\lim_{n \to \infty} |a_n - a| = 0$，从而：
+\[
+\lim_{n \to \infty} \frac{\lfloor na_n \rfloor}{n} = a。
+\]
+
+\textbf{综上：}
+\[
+\lim_{n \to \infty} \frac{a_1 + a_2 + \cdots + a_n}{n} = \lim_{n \to \infty} \frac{\lfloor na_n \rfloor}{n} = a。
+\]
+\end{proof}
+
+\subsubsection*{1.2.3} 
+设 $a_0 + a_1 + \cdots + a_p = 0$。试证：
+\[
+\lim_{n \to \infty} \left( a_0 \sqrt{n} + a_1 \sqrt{n+1} + \cdots + a_p \sqrt{n+p} \right) = 0。
+\]
+\begin{proof}
+注意到：
+\[
+\sum_{k=0}^p a_k \sqrt{n+k} = \sum_{k=0}^p \left( a_0 + a_1 + \cdots + a_k \right) (\sqrt{n+k} - \sqrt{n+k+1}),
+\]
+\[
+= \sum_{k=0}^p \frac{a_0 + a_1 + \cdots + a_k}{\sqrt{n+k} + \sqrt{n+k+1}}.
+\]
+
+由于 $a_0 + a_1 + \cdots + a_p = 0$，显然：
+\[
+\lim_{n \to \infty} \left( a_0 \sqrt{n} + a_1 \sqrt{n+1} + \cdots + a_p \sqrt{n+p} \right) = \lim_{n \to \infty} 0 = 0。
+\]
+\end{proof}
+
+\subsubsection*{1.2.4} 
+设数列 $\{a_n\}_{n=1}^\infty$ 满足 $\lim_{n \to \infty} (a_n - a_{n-2}) = 0$，试证：
+\[
+\lim_{n \to \infty} \frac{a_n - a_{n-1}}{n} = 0。
+\]
+\begin{proof}
+为方便起见，令 $a_0 = 0$，那么：
+\[
+\lim_{n \to \infty} \frac{a_{2n}}{n} = \lim_{n \to \infty} \frac{(a_2 - a_0) + (a_4 - a_2) + \cdots + (a_{2n} - a_{2n-2})}{n}.
+\]
+
+由已知条件 $\lim_{n \to \infty} (a_{2n} - a_{2n-2}) = 0$，因此：
+\[
+\lim_{n \to \infty} \frac{a_{2n}}{n} = 0。
+\]
+
+同理，可得：
+\[
+\lim_{n \to \infty} \frac{a_{2n+1}}{2n+1} = 0。
+\]
+
+合并后得：
+\[
+\lim_{n \to \infty} \frac{a_n}{n} = 0。
+\]
+
+进一步，计算：
+\[
+\lim_{n \to \infty} \frac{a_n - a_{n-1}}{n} = \lim_{n \to \infty} \left( \frac{a_n}{n} - \frac{a_{n-1}}{n-1} \cdot \frac{n-1}{n} \right)。
+\]
+
+由 $\lim_{n \to \infty} \frac{a_n}{n} = 0$ 和 $\lim_{n \to \infty} \frac{n-1}{n} = 1$，有：
+\[
+\lim_{n \to \infty} \frac{a_n - a_{n-1}}{n} = 0 - 0 = 0。
+\]
+
+综上，$\lim_{n \to \infty} \frac{a_n - a_{n-1}}{n} = 0$。
+\end{proof}
+
+\subsubsection*{1.2.5} 
+设数列 $\{a_n\}_{n=1}^\infty$ 满足 $0 < a_n < 1$，$(1 - a_n)a_{n+1} > \frac{1}{4}$，$n \in \mathbb{N}$。
+
+试证：
+\[
+\lim_{n \to \infty} a_n = \frac{1}{2}。
+\]
+
+\begin{proof}
+注意到函数 $(1 - x)x$ 在 $[0, 1]$ 上的最大值为 $\frac{1}{4}$，  
+因此由条件 $(1 - a_n)a_{n+1} > \frac{1}{4} \geq (1 - a_n)a_n$，可知 $\{a_n\}$ 是严格单调递增的。
+
+进而可得 $\{a_n\}$ 有极限，令其为 $a$，那么有：
+\[
+(1 - a)a \geq \frac{1}{4}。
+\]
+
+解得 $a = \frac{1}{2}$。
+
+因此，$\lim_{n \to \infty} a_n = a = \frac{1}{2}$。
+\end{proof}
+
+\subsubsection*{1.2.6} 
+设数列 $\{a_n\}_{n=1}^\infty$ 对所有正整数 $n, p$ 满足
+\[
+|a_{n+p} - a_n| \leq \frac{p}{n}，
+\]
+问 $\{a_n\}_{n=1}^\infty$ 是否是基本列？
+\begin{proof}
+$\{a_n\}$ 不一定是基本列。例如取 $a_n = 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n}$，  
+那么 $|a_{n+p} - a_n| \leq \frac{p}{n}$ 是成立的，但 $\{a_n\}$ 显然发散，不是基本列。
+\end{proof}
+
+\subsubsection*{1.2.7} 
+设数列 $\{a_n\}_{n=1}^\infty$ 对所有正整数 $n, p$ 满足
+\[
+|a_{n+p} - a_n| \leq \frac{p}{n^2}，
+\]
+问 $\{a_n\}_{n=1}^\infty$ 是否是基本列？
+
+\begin{proof}
+$\{a_n\}$ 是基本列。
+
+对 $\varepsilon > 0$，只要取 $N = \lfloor \frac{1}{\varepsilon} \rfloor + 1$，那么当 $n > N$ 时，有：
+\[
+|a_{n+p} - a_n| \leq |a_{n+p} - a_{n+p-1}| + |a_{n+p-1} - a_{n+p-2}| + \cdots + |a_{n+1} - a_n|
+\]
+\[
+\leq \frac{1}{(n+p-1)^2} + \frac{1}{(n+p-2)^2} + \cdots + \frac{1}{n^2}
+\]
+\[
+\leq \frac{1}{n(n+1)} + \frac{1}{(n+1)(n+2)} + \cdots + \frac{1}{(n+p-1)n}
+\]
+\[
+= \frac{1}{n(n-1)} < \varepsilon。
+\]
+
+即 $\{a_n\}$ 是柯西收敛级列，故 $\{a_n\}$ 是基本列。
+\end{proof}
+
+\subsubsection*{1.2.8} 
+设数列 $\{a_n\}_{n=1}^\infty$ 有界且发散，试证 $\{a_n\}_{n=1}^\infty$ 必有两个子列收敛于不同的极限。
+\begin{proof}
+\begin{enumerate}
+    \item 由列紧性定理知 $\{a_n\}$ 有一个收敛子列，极限设为 $a$。
+    \item 因为 $\{a_n\}$ 不以 $a$ 为极限，所以 $\exists \varepsilon_0 > 0$，使得对于每行 $j > 0$，都存在 $k_j > 0$ 使得 $|a_{k_j} - a| \geq \varepsilon_0$。
+    \item 不妨让 $k_{j+1} > k_j$，那么从子列 $\{a_{k_j}\}$ 中又可以取出另一个收敛子列。显然，这是 $\{a_n\}$ 的一个收敛子列，且不以 $a$ 为极限。
+\end{enumerate}
+
+综上，$\{a_n\}$ 有界发散，$\{a_n\}$ 必有两个子列收敛于不同的极限。
+\end{proof}
+
+\subsection{有限覆盖上下极限作业题}
+\subsubsection*{1.3.1} 
+设 $\{a_n\}_{n=1}^\infty, \{b_n\}_{n=1}^\infty$ 为有界数列，试证：
+\[
+\liminf a_n + \liminf b_n \leq \liminf (a_n + b_n) 
+\leq \liminf a_n + \limsup b_n \leq \limsup a_n + \limsup b_n。
+\]
+\begin{proof}
+注意到上下极限的关系，要证的是不等式，仅需证明：
+\[
+\liminf a_n + \liminf b_n \leq \liminf (a_n + b_n) 
+\leq \liminf a_n + \limsup b_n \tag{1}
+\]
+\[
+\liminf (a_n + b_n) 
+\leq \liminf a_n + \limsup b_n \leq \limsup a_n + \limsup b_n \tag{2}
+\]
+
+
+我们只需证明其中的不等式 $(1)$ 和 $(2)$，其余不等式可以由类似推导得到。
+
+\textbf{证明不等式 $(1)$：}
+\[
+\inf a_k + \inf b_k \leq \inf (a_k + b_k) \leq \inf a_k + \sup b_k。
+\]
+
+1. 当 $k \to \infty$ 时：
+\[
+\inf a_k \leq a_k, \quad \inf b_k \leq b_k \implies a_k + b_k \geq \inf a_k + \inf b_k。
+\]
+因此，$\inf a_k + \inf b_k$ 是 $a_k + b_k$ 的一个下界，从而：
+\[
+\inf a_k + \inf b_k \leq \inf (a_k + b_k)。 \tag{3}
+\]
+
+2. 记 $c_k = a_k + b_k$，则 $a_k = c_k - b_k$。由此可得：
+\[
+\inf a_k = \inf (c_k - b_k) \geq \inf c_k - \sup b_k。
+\]
+根据 $\inf c_k = \inf (a_k + b_k)$，因此：
+\[
+\inf (a_k + b_k) \leq \inf a_k + \sup b_k。 \tag{4}
+\]
+
+由 $(3)$ 和 $(4)$，可得：
+\[
+\inf a_k + \inf b_k \leq \inf (a_k + b_k) \leq \inf a_k + \sup b_k。 \tag{5}
+\]
+
+\textbf{证明不等式 $(2)$：} 类似证明，可以得到：
+\[
+\liminf a_n + \liminf b_n \leq \liminf (a_n + b_n) \leq \limsup a_n + \limsup b_n。
+\]
+
+综上，证明了所需的不等式：
+\[
+\liminf a_n + \liminf b_n \leq \liminf (a_n + b_n) \leq \liminf a_n + \limsup b_n \leq \limsup a_n + \limsup b_n。
+\]
+\end{proof}
+
+\subsubsection*{1.3.2} 
+设 $\{a_n\}_{n=1}^\infty$ 是正数列，且 $\liminf a_n > 0$。试证：
+\[
+\limsup \frac{1}{a_n} = \frac{1}{\liminf a_n}, \quad \liminf \frac{1}{a_n} = \frac{1}{\limsup a_n}。
+\]
+\begin{proof}
+1. 证明 $\limsup \frac{1}{a_n} = \frac{1}{\liminf a_n}$：
+
+(1) 存在 $\{a_{n_k}\}$ 的子列，使得：
+\[
+\limsup \frac{1}{a_n} = \lim \frac{1}{a_{n_k}} = \frac{1}{\liminf a_n}。
+\]
+
+(2) 又存在另一子列 $\{a_{m_k}\}$，使得：
+\[
+\liminf \frac{1}{a_n} = \lim \frac{1}{a_{m_k}} = \frac{1}{\limsup a_n}。
+\]
+
+因此：
+\[
+\limsup \frac{1}{a_n} = \frac{1}{\liminf a_n}。
+\]
+
+2. 证明 $\liminf \frac{1}{a_n} = \frac{1}{\limsup a_n}$：
+
+由上述结论 $\limsup \frac{1}{a_n} = \frac{1}{\liminf a_n}$，可得：
+\[
+(\limsup \frac{1}{a_n}) \cdot (\liminf a_n) = 1。
+\]
+
+因为 $\{a_n\}$ 是正数列，且 $\liminf a_n > 0$，显然有：
+\[
+(\limsup a_n) \cdot (\liminf \frac{1}{a_n}) = 1。
+\]
+
+由 $\{a_n\}$ 的任意性，故有：
+\[
+\liminf \frac{1}{a_n} = \frac{1}{\limsup a_n}。
+\]
+\end{proof}
+
+\subsubsection*{1.3.3} 
+设 $\{a_n\}_{n=1}^\infty$ 为正数列，且
+\[
+(\limsup a_n) \left(\limsup \frac{1}{a_n}\right) = 1。
+\]
+试证 $\{a_n\}_{n=1}^\infty$ 收敛。
+
+\begin{proof}
+易知 $\{a_n\}$ 为正数列，故 $\liminf a_n \geq 0$。
+
+由题意可知：
+\[
+(\limsup a_n) \left(\limsup \frac{1}{a_n}\right) = 1，
+\]
+得：
+\[
+\limsup \frac{1}{a_n} = \frac{1}{\limsup a_n}。
+\]
+
+若 $\liminf a_n > 0$，则显然有 $\liminf a_n = \limsup a_n$，故 $\{a_n\}$ 收敛。
+
+若 $\liminf a_n = 0$，那么：
+\[
+\limsup \frac{1}{a_n} = +\infty。
+\]
+同理 $\limsup a_n = 0$。因此 $\{a_n\}$ 收敛。
+
+综上，$\{a_n\}$ 收敛。
+\end{proof}
+
+\subsubsection*{1.3.4} 
+设 $\{a_n\}_{n=1}^\infty$ 为正数列，试证：
+\[
+\limsup \sqrt[n]{a_n} \leq \limsup \frac{a_{n+1}}{a_n}。
+\]
+\begin{proof}
+记 $\alpha = \limsup \frac{a_{n+1}}{a_n}$。若 $\alpha = +\infty$，则不等式显然成立。
+
+当 $0 \leq \alpha < +\infty$ 时，需证明 $\limsup \sqrt[n]{a_n} \leq \alpha$。  
+只需证明对任意 $\varepsilon > 0$，有 $\limsup \sqrt[n]{a_n} < \alpha + \varepsilon$。
+
+由定义，对于任意 $\varepsilon > 0$，存在 $N > 0$，当 $n > N$ 时，有：
+\[
+\frac{a_{n+1}}{a_n} < \alpha + \varepsilon。
+\]
+
+取 $n = N, N+1, \ldots$，则 $n-N$ 个相乘得：
+\[
+\frac{a_n}{a_N} = \frac{a_{N+1}}{a_N} \cdot \frac{a_{N+2}}{a_{N+1}} \cdots \frac{a_n}{a_{n-1}} < (\alpha + \varepsilon)^{n-N}。
+\]
+
+即有：
+\[
+a_n < a_N (\alpha + \varepsilon)^{n-N}。
+\]
+
+令 $M \equiv a_N (\alpha + \varepsilon)^{-N}$，则有：
+\[
+a_n < M (\alpha + \varepsilon)^n。
+\]
+
+因此：
+\[
+\sqrt[n]{a_n} < \sqrt[n]{M} (\alpha + \varepsilon)，
+\]
+当 $n \to \infty$ 时，$\sqrt[n]{M} \to 1$，取上极限得：
+\[
+\limsup \sqrt[n]{a_n} \leq \alpha + \varepsilon。
+\]
+
+由于 $\varepsilon$ 的任意性，得：
+\[
+\limsup \sqrt[n]{a_n} \leq \alpha。
+\]
+
+综上，得：
+\[
+\limsup \sqrt[n]{a_n} \leq \limsup \frac{a_{n+1}}{a_n}。
+\]
+\end{proof}
+
+\subsubsection*{1.3.5} 
+给定数列 $\{a_n\}_{n=1}^\infty$，记
+\[
+b_n = 2a_n - 3a_{n+1}, \quad n = 1, 2, \ldots
+\]
+试证：数列 $\{b_n\}_{n=1}^\infty$ 收敛的充要条件是数列 $\{a_n\}_{n=1}^\infty$ 收敛。
+\begin{proof}
+\textbf{必要性}  
+若 $\{a_n\}$ 收敛，不妨设 $\lim_{n \to \infty} a_n = a$，则：
+\[
+\lim_{n \to \infty} b_n = \lim_{n \to \infty} (2a_n - 3a_{n+1}) = 2a - 3a = a，
+\]
+显然 $\{b_n\}$ 收敛。
+
+\textbf{充分性}  
+若 $\{b_n\}$ 收敛，设 $\lim_{n \to \infty} b_n = b$。由定义：
+\[
+b_n = 2a_n - 3a_{n+1}。
+\]
+可得：
+\[
+a_{n+1} = \frac{2}{3}a_n - \frac{1}{3}b_n。
+\]
+令 $C_n = a_{n+1} - a_n$，作差得：
+\[
+C_{n+1} = \frac{2}{3}C_n - \frac{1}{3}(b_{n+1} - b_n)。
+\]
+当 $n \to \infty$ 时，因 $b_{n+1} - b_n \to 0$，可得：
+\[
+\lim_{n \to \infty} C_n = \frac{2}{3} \lim_{n \to \infty} C_n，
+\]
+显然 $\lim_{n \to \infty} C_n = 0$，即：
+\[
+\lim_{n \to \infty} (a_{n+1} - a_n) = 0。
+\]
+
+由 $\{a_n\}$ 的递推公式，可知 $\{a_n\}$ 收敛。
+
+综上，$\{b_n\}$ 收敛的充要条件是 $\{a_n\}$ 收敛。
+\end{proof}
+
+\subsubsection*{1.3.6} 
+设 $\alpha, \beta > 0, a_1 > 0$，且
+\[
+a_{n+1} = \alpha + \frac{\beta}{a_n}, \quad n = 1, 2, \ldots
+\]
+试证数列 $\{a_n\}_{n=1}^\infty$ 收敛，并求其极限。
+\begin{proof}
+由于 $a_1 > 0, \alpha > 0, \beta > 0$，由递推关系 $a_{n+1} = \alpha + \frac{\beta}{a_n}$ 可知，对于任意 $n \geq 1$，均有 $a_n > \alpha > 0$。
+
+将递推公式写为：
+\[
+a_{n+1} = \alpha + \frac{\beta}{a_n}。
+\]
+
+定义函数 $f(x) = \alpha + \frac{\beta}{x}$，解方程 $f(x) = x$，得：
+\[
+x_1 = \frac{\alpha + \sqrt{\alpha^2 + 4\beta}}{2}, \quad x_2 = \frac{\alpha - \sqrt{\alpha^2 + 4\beta}}{2}。
+\]
+
+显然 $x_1 > 0$ 且 $x_2 < 0$，由于 $a_n > 0$，因此只能有 $a_n$ 收敛于 $x_1$。
+
+令 $a_n - x_1 = b_n$，则：
+\[
+a_{n+1} - x_1 = f(a_n) - x_1。
+\]
+
+将 $f(x)$ 线性化，得：
+\[
+f(a_n) - x_1 = \frac{\beta}{a_n} - \frac{\beta}{x_1} = -\frac{\beta}{x_1^2}(a_n - x_1)。
+\]
+
+于是：
+\[
+b_{n+1} = -\frac{\beta}{x_1^2} b_n。
+\]
+
+显然，$|\frac{\beta}{x_1^2}| < 1$，因此 $b_n \to 0$，即 $a_n \to x_1$。
+
+综上，$\{a_n\}$ 收敛，且极限为：
+\[
+\lim_{n \to \infty} a_n = \frac{\alpha + \sqrt{\alpha^2 + 4\beta}}{2}。
+\]
+\end{proof}
+
+\subsubsection*{1.3.7} 
+设数列 $\{a_n\}_{n=1}^\infty$ 满足 $a_{p+q} \leq a_p + a_q$，$p, q = 1, 2, \ldots$，试证：
+\[
+\lim_{n \to \infty} \frac{a_n}{n} = \inf_{n \geq 1} \frac{a_n}{n}。
+\]
+
+\begin{proof}
+对于不等式 $a_{p+q} \leq a_p + a_q$，考虑其意义，便于想象，不妨先设 $p = 10$。  
+此时，对于任意 $a_q$，例如 $a_{11} \leq a_{10} + a_1, a_{20} \leq 2a_{10} + a_2$。
+
+一般地，对于任意自然数 $n$ 可以表示为 $n = k \cdot 10 + r$，其中 $k = 0, 1, 2, \ldots$，$r = 0, 1, 2, \ldots, 9$。  
+从而有：
+\[
+a_n \leq k a_{10} + a_r。
+\]
+令 $k = \frac{n - r}{10} \to +\infty$，由此式可知：
+\[
+\inf_{n \geq 1} \frac{a_n}{n} \leq \frac{a_n}{n} \leq \frac{k a_{10}}{n} + \frac{a_r}{n}，
+\]
+此式对一切 $n$ 成立。
+
+令 $n \to +\infty$，取上下极限。注意 $k/n \to 1/10$，我们有：
+\[
+\inf_{n \geq 1} \frac{a_n}{n} \leq \liminf_{n \to \infty} \frac{a_n}{n} \leq \limsup_{n \to \infty} \frac{a_n}{n} \leq \inf_{n \geq 1} \frac{a_n}{n}。
+\]
+因此：
+\[
+\liminf_{n \to \infty} \frac{a_n}{n} = \limsup_{n \to \infty} \frac{a_n}{n} = \inf_{n \geq 1} \frac{a_n}{n}。
+\]
+
+综上：
+\[
+\lim_{n \to \infty} \frac{a_n}{n} = \inf_{n \geq 1} \frac{a_n}{n}。
+\]
+\end{proof}
+
+\subsubsection*{1.3.8}
+设 $\{a_n\}_{n=1}^\infty$ 为正数列，试证：
+\[
+\limsup_{n \to \infty} n \left( \frac{1 + a_{n+1}}{a_n} - 1 \right) \geq 1。
+\]
+\begin{proof}
+假设 $\limsup_{n \to \infty} n \left( \frac{1 + a_{n+1}}{a_n} - 1 \right) < 1$，则存在 $n_0 \in \mathbb{N}$，当 $n \geq n_0$ 时，总有：
+\[
+n \left( \frac{1 + a_{n+1}}{a_n} - 1 \right) < 1，
+\]
+即：
+\[
+\frac{1 + a_{n+1}}{a_n} < 1 + \frac{1}{n}，
+\]
+从而：
+\[
+a_n - a_{n+1} > \frac{a_n}{n}。
+\]
+
+依次可得：
+\[
+\frac{a_{n_0}}{n_0} - \frac{a_{n_0+1}}{n_0+1} > \frac{a_{n_0}}{n_0} - \frac{a_{n_0+1}}{n_0+1} + \frac{a_{n_0+1}}{n_0+2} > \cdots，
+\]
+相加可得：
+\[
+\frac{a_{n_0}}{n_0} > \frac{1}{n_0} + \frac{1}{n_0+1} + \cdots + \frac{1}{n}。
+\]
+
+当 $n_0$ 选定后，$\frac{a_{n_0}}{n_0}$ 为定值，而显然：
+\[
+\frac{1}{n_0} + \cdots + \frac{1}{n}
+\]
+为无界的，这与假设矛盾。
+
+故假设不成立，得：
+\[
+\limsup_{n \to \infty} n \left( \frac{1 + a_{n+1}}{a_n} - 1 \right) \geq 1。
+\]
+\end{proof}
+
+\subsubsection*{1.3.9}
+设 $\{a_n\}_{n=1}^\infty$ 为有界数列，记
+\[
+A_n = \frac{a_1 + a_2 + \cdots + a_n}{n}。
+\]
+指出 $\limsup a_n$ 与 $\limsup A_n$ 的大小关系并给出证明。
+
+\begin{proof}
+$\limsup A_n \leq \limsup a_n$. 下证。
+
+已知 $\{a_n\}$ 有界，故 $\exists M$ 使得 $\lvert a_n \rvert \leq M$，不妨令 $A = \limsup a_n$，$B = \limsup A_n$。
+
+对 $\forall \varepsilon > 0$，由 $A = \limsup A_n$ 及 $\lvert a_n \rvert \leq M$ 可知，在 $\{a_n\}$ 中，只有有限项大于 $A + \varepsilon$，记这些项的最大下标为 $m$。则当 $n > m$ 时，
+\[
+A_n \leq \frac{mM + (n-m)(A + \varepsilon)}{n} \leq M \frac{m}{n} + A + \varepsilon。
+\]
+当 $n$ 充分大时，有 $A_n \leq A + \varepsilon$，由 $\varepsilon$ 的任意性可知 $A_n \leq A$，故 $B \leq A$。
+
+因此 $\limsup A_n \leq \limsup a_n$。
+\end{proof}
+
+\subsubsection*{1.3.10}
+设 $\{a_n\}_{n=1}^\infty$ 是闭区间 $[a,b]$ 内的数列，$f$ 是 $[a,b]$ 上的连续函数。是否一定有
+\[
+f(\limsup a_n) = \limsup f(a_n)?
+\]
+说明理由。
+\begin{proof}
+不一定成立。
+
+不妨令 $[a, b] = [0, 1]$，令 $f$ 是 $[0, 1]$ 上单调连续的概率空间 $P$。
+
+设 $\{a_n\}$ 构成 $P$ 上的一个事件列。那么
+\[
+P(\limsup A_n) = P\left(\bigcap_{k=1}^\infty \bigcup_{n=k}^\infty A_n\right) = \lim_{k \to \infty} P\left(\bigcup_{n=k}^\infty A_n\right) \geq \limsup_{k \to \infty} P(A_n) = \limsup P(A_n)。
+\]
+即 $P(\limsup A_n) \geq \limsup P(A_n)$。因此，不一定有 $f(\limsup a_n) = \limsup f(a_n)$。
+\end{proof}
+
+\subsection{连续函数作业题}
+
+\subsubsection*{1.4.1}
+设 
+\[
+\lim_{x \to 0} \frac{f(x)}{x} \in \mathbb{R},
+\]
+又有常数 $\alpha \neq 1$ 使得
+\[
+f(x) - f(\alpha x) = o(x) \quad (x \to 0).
+\]
+试证：
+\[
+f(x) = o(x) \quad (x \to 0).
+\]
+
+\begin{proof}
+不妨令 $\lim_{x \to 0} \frac{f(x)}{x} = A \in \mathbb{R}$，则显然有
+\[
+\lim_{x \to 0} \frac{f(\alpha x)}{x} = \alpha A。
+\]
+结合已知条件可得
+\[
+0 = \lim_{x \to 0} \frac{f(x) - f(\alpha x)}{x} = A - \alpha A = (1-\alpha)A，
+\]
+于是显然 $A = 0$。
+
+由此得证 $f(x) = o(x) \quad (x \to 0)$。
+\end{proof}
+
+\subsubsection*{1.4.2}
+设函数 $f, g$ 在区间 $I$ 上连续，记
+\[
+F(x) = \min \{f(x), g(x)\}, \quad G(x) = \max \{f(x), g(x)\},
+\]
+试证：$F, G$ 在 $I$ 上连续。
+
+\begin{proof}
+易知
+\[
+F(x) = \frac{1}{2} \left[ f(x) + g(x) - |f(x) - g(x)| \right], \quad 
+G(x) = \frac{1}{2} \left[ f(x) + g(x) + |f(x) - g(x)| \right].
+\]
+对于任意 $x_0 \in I$，若 $f$ 在点 $x_0$ 连续，$g$ 在点 $x_0$ 连续，则 $f(x), g(x)$ 在 $I$ 上均连续。易知 $|f(x) - g(x)|$ 在 $I$ 上也连续，故 $|f(x) - g(x)|$ 在区间 $I$ 上连续。
+
+故显然，$F(x), G(x)$ 在 $I$ 上均连续。
+\end{proof}
+
+\subsubsection*{1.4.3}
+设函数 $f$ 在区间 $[a,b]$ 上连续，记
+\[
+m(x) = \inf_{a \leq t \leq x} f(t).
+\]
+试证：函数 $m$ 在 $[a,b]$ 上连续。
+
+\begin{proof}
+设 $x_0 \in [a, b]$，先证明 $m(x)$ 在点 $x_0$ 右连续。
+
+任给 $\epsilon > 0$，由于 $f(x)$ 在点 $x_0$ 处连续，故存在 $\delta > 0$，使得当 $|x - x_0| < \delta$ 时，恒有 $|f(x) - f(x_0)| < \epsilon$，于是当 $x_0 < x < x_0 + \delta$ 时，有
+\[
+f(x) > f(x_0) - \epsilon \geq m(x_0) - \epsilon。
+\]
+而当 $a \leq s \leq x_0$ 时，$f(s) \geq m(x_0) \geq m(x_0) - \epsilon$，由此可知
+\[
+m(x) \geq \min\{m(x_0), f(x)\} \geq m(x_0) - \epsilon。
+\]
+又因为 $m(x_0)$ 显然是递减的，故 $m(x_0) > m(x) \geq m(x_0) - \epsilon$（当 $x_0 < x < x_0 + \delta$）。
+
+由此可知
+\[
+\lim_{x \to x_0^+} m(x) = m(x_0)，
+\]
+即 $m(x)$ 在 $x_0$ 处右连续。
+
+下面证明左连续。不妨设 $f(x)$ 在 $[a, x_0]$ 上的最小值在 $x = x_0$ 时取得，即
+\[
+m(x_0) = f(x_0) \quad \text{且} \quad m(x) = f(x_0), \quad a \leq x < x_0，
+\]
+显然成立。
+
+当 $x \to x_0^-$ 时，$m(x) = m(x_0)$，从而右连续。
+
+任给 $\epsilon > 0$，同理，存在 $\delta > 0$，当 $x_0 - \delta < x < x_0$ 时，恒有
+\[
+f(x) < f(x_0) + \epsilon = m(x_0) + \epsilon。
+\]
+因此
+\[
+m(x_0) \leq m(x) \leq m(x_0) + \epsilon，
+\]
+从而
+\[
+\lim_{x \to x_0^-} m(x) = m(x_0)，
+\]
+即 $m(x)$ 在 $x_0$ 处左连续。
+
+综上，$m(x)$ 在 $x_0$ 处左右连续，由 $x_0$ 的任意性可知，函数 $m$ 在 $[a, b]$ 上连续。
+\end{proof}
+
+\subsubsection*{1.4.4}
+设函数 $f$ 在原点的某邻域 $U$ 内有界，且有常数 $\alpha, \beta > 1$ 满足
+\[
+f(\alpha x) = \beta f(x), \quad x \in U。
+\]
+试证：$f$ 在原点处连续。
+
+\begin{proof}
+在 $f(\alpha x) = \beta f(x)$ 中，令 $x = 0$，而 $\alpha, \beta > 1$，即 $f(0) = f(\alpha \cdot 0) = \beta f(0)$，所以 $f(0) = 0$。
+
+若证明 $\lim_{x \to 0} f(x) = 0$，则由 $U(0, \delta)$ 有界知 $f$ 在原点连续。由 $f(\alpha x) = \beta f(x)$ 推得 $f(\alpha^n x) = \beta^n f(x)$，$f$ 在 $U(0, \delta)$ 内有界，故当 $x \in (-\delta, \delta)$ 时，$\lvert f(x) \rvert < M$。
+
+对任意 $\varepsilon > 0$，由 $\beta > 1$，可知存在 $N \in \mathbb{N}$，使得 $\frac{M}{\beta^n} < \varepsilon$。取定 $n$，当 $\lvert x \rvert < \frac{\delta}{\alpha^n}$ 时，显然有
+\[
+\lvert f(x) - 0 \rvert = \lvert f(x) \rvert = \beta^n \lvert f(\alpha^n x) \rvert < \beta^n \cdot \frac{M}{\beta^n} < \varepsilon。
+\]
+
+故 $\lim_{x \to 0} f(x) = 0 = f(0)$。
+
+综上，$f$ 在原点连续。
+\end{proof}
+
+\subsubsection*{1.4.5}
+设函数 $f: \mathbb{R} \to \mathbb{R}$ 在 $0,1$ 两点连续，且满足
+\[
+f(x^2) = f(x), \quad x \in \mathbb{R}.
+\]
+试证：$f$ 是常函数。
+
+\begin{proof}
+当 $x \in (0,1)$，由条件可知 $f(x) = f(x^2) = f(x^4) = \cdots = f(x^{2^n})$。
+
+由于 $f$ 在 $x=0$ 处连续，令 $n \to \infty$，则有
+\[
+f(x) = \lim_{n \to \infty} f(x^{2^n}) = f(0)。
+\]
+
+当 $x = 1$，由 $f$ 的连续性可得
+\[
+f(1) = \lim_{x \to 1^-} f(x) = \lim_{x \to 1^+} f(x) = f(1)。
+\]
+
+又当 $x \in (1,+\infty)$ 时，有
+\[
+f(x) = f(\sqrt{x}) = f((\sqrt{x})^2) = \cdots = f((x^{\frac{1}{2^n}})^2)。
+\]
+
+再由 $f$ 在 $x=1$ 处的连续性有
+\[
+f(x) = \lim_{n \to \infty} f(x^{\frac{1}{2^n}}) = \lim_{x \to 1^+} f(x) = f(1) = f(0)。
+\]
+
+易见 $f$ 为相同常数，故 $f(x) \equiv f(0), \, x \in (-\infty,+\infty)$。
+
+综上，$f$ 为常函数。
+\end{proof}
+
+\subsubsection*{1.4.6}
+设函数 $f:\mathbb{R} \to \mathbb{R}$ 在 $x=0$ 处有有限的左极限和右极限，且满足
+\[
+f\left(\frac{x+y}{2}\right) = \frac{f(x) + f(y)}{2}, \quad x, y \in \mathbb{R}.
+\]
+试证：
+\[
+f(x) = (f(1) - f(0))x + f(0).
+\]
+
+\begin{proof}
+由条件有
+\[
+f\left(\frac{x+y}{2}\right) = \frac{f(x) + f(y)}{2},
+\]
+记 $b = f(0)$，则有
+\[
+f(x) + f(y) = f(x+y) + b，
+\]
+进而有
+\[
+f(x) - b + f(y) - b = f(x+y) - b。
+\]
+令 $g(x) = f(x) - b$，则
+\[
+g(x) + g(y) = g(x+y)。
+\]
+显然，$g(x)$ 满足 Cauchy 方程，因此 $g(x) = g(1)x$，从而有
+\[
+f(x) = g(1)x + b = [f(1) - f(0)]x + f(0)。
+\]
+\end{proof}
+
+\subsubsection*{1.4.7}
+设函数 $f$ 在 $[0, 2a]$ 上连续，且 $f(0) = f(2a)$。  
+试证：存在 $\xi \in [0, a]$ 使得 $f(\xi) = f(\xi + a)$。
+\begin{proof}
+因为 $f(x)$ 在 $[0, 2a]$ 上连续，则 $\varphi(x) = f(x) - f(x + a)$ 在 $[0, a]$ 上连续。  
+令 $\varphi(0) = f(0) - f(a)$，$\varphi(a) = f(a) - f(2a) = f(a) - f(0)$。
+
+若 $f(0) - f(a) = 0$，则有 $\xi = 0$ 或 $\xi = a$，使得 $f(\xi) = f(\xi + a)$。
+
+若 $f(0) - f(a) \neq 0$，则有 $\varphi(0) \cdot \varphi(a) < 0$，由零点存在定理可知存在 $\xi \in (0, a)$，使得 $\varphi(\xi) = 0$，即 $f(\xi) = f(\xi + a)$。
+\end{proof}
+
+\subsubsection*{1.4.8}
+设函数 $f$ 在 $[0,1]$ 上连续，且 $f(0) = f(1)$。试证：对于任意正整数 $n$，存在实数 $\xi \in \left[0, 1 - \frac{1}{n}\right]$ 满足
+\[
+f\left(\xi + \frac{1}{n}\right) = f(\xi)。
+\]
+
+\begin{proof}
+当 $n=1$ 时，因 $f(0) = f(1)$，则取 $\xi = 0$，结论成立。
+
+当 $n > 1$ 时，令 $F(x) = f\left(x + \frac{1}{n}\right) - f(x)$，则
+\[
+F(0) + F\left(\frac{1}{n}\right) + \cdots + F\left(\frac{n-1}{n}\right) 
+\]
+\[
+= [f\left(\frac{1}{n}\right) - f(0)] + [f\left(\frac{2}{n}\right) - f\left(\frac{1}{n}\right)] + \cdots + [f(1) - f\left(\frac{n-1}{n}\right)] 
+\]
+\[
+= f(1) - f(0) = 0。
+\]
+
+若 $F(0) = F\left(\frac{1}{n}\right) = \cdots = F\left(\frac{n-1}{n}\right) = 0$，取任意 $\xi = 0, \frac{1}{n}, \cdots, \frac{n-1}{n}$ 中一点即可。
+
+若 $F(0), F\left(\frac{1}{n}\right), \cdots, F\left(\frac{n-1}{n}\right)$ 均不全可为 $0$，则有两项极必为异号。
+
+即 $\exists i, j$，使得 $F(\xi_i) F(\xi_j) < 0$，$\xi_i, \xi_j \in \{0, \frac{1}{n}, \cdots, \frac{n-1}{n}\}$。
+
+又因 $f(x)$ 在 $[0,1]$ 连续，由根值存在定理可知，存在 $\xi \in \left[0, 1 - \frac{1}{n}\right]$，使得 $F(\xi) = 0$。
+
+即 $f\left(\xi + \frac{1}{n}\right) = f(\xi)$。
+
+综上，存在 $\xi \in \left[0, 1 - \frac{1}{n}\right]$ 满足 $f\left(\xi + \frac{1}{n}\right) = f(\xi)$。
+\end{proof}
+
+\subsubsection*{1.4.9}
+设函数 $f, g$ 在 $[a, b]$ 上连续，$f$ 单调，且有数列 $\{x_n\}_{n=1}^\infty \subset [a, b]$ 使得对任意正整数 $n$，有 $g(x_n) = f(x_{n+1})$。试证：存在 $\xi \in [a, b]$ 满足 $f(\xi) = g(\xi)$。
+\begin{proof}
+设 $F(x) = f(x) - g(x)$，那么 $F(x_n) = f(x_n) - g(x_n) = f(x_n) - f(x_{n+1})$。
+
+根据连续函数的介值性可知，存在 $\xi_n \in [x_n, x_{n+1}]$，使得
+\[
+F(\xi_n) = \frac{F(x_n)}{n}.
+\]
+
+取 $\{ \xi_n \}$ 的一个收敛子列 $\{ \xi_{n_k} \}$，其极限设为 $\xi$，利用 $f$ 的单调收敛性可知
+\[
+F(\xi) = \lim_{k \to \infty} F(\xi_{n_k}) = \lim_{k \to \infty} \frac{F(x_{n_k})}{n_k} = 0。
+\]
+
+所以 $F(\xi) = 0$，即 $f(\xi) = g(\xi)$，$\xi \in [a, b]$。
+\end{proof}
+
+\subsubsection*{1.4.10}
+设函数 $f$ 在 $[0,+\infty)$ 上连续且有界，又对任意实数 $c$，$f(x) = c$ 只有有限多个解。试证：
+\[
+\lim_{x \to +\infty} f(x) \text{ 存在}.
+\]
+
+\begin{proof}
+不妨设 $m_1 < f(x) < M_1, \; x \in [a,+\infty), \; C_1 = \frac{m_1 + M_1}{2}$，因为方程 $f(x) = C_1$ 至多只有有限个实根，所以当 $x$ 充分大时，曲线 $y = f(x)$ 与直线 $y = C_1$ 无公共交点，因此当 $x$ 充分大时，$f(x)$ 始终属于 $(m_1, C_1]$ 或 $[C_1, M_1)$ 内。
+
+若 $f(x)$ 属于前者，则令 $[m_2, M_2] = [m_1, C_1]$，否则令 $[m_2, M_2] = [C_1, M_1]$。依此类推，则可得到闭区间列 $\{[m_n, M_n]\}$，满足：
+\begin{enumerate}
+    \item $[M_{n+1}, M_{n+1}] \subseteq [M_n, M_n], \; n = 1, 2, 3, \ldots$
+    \item $M_n - m_n = \frac{M_1 - m_1}{2^n} \to 0, \; n \to \infty$
+    \item 对于每个 $n$，当 $x$ 充分大时，$f(x) \in (m_n, M_n)$
+\end{enumerate}
+
+由闭区间套定理，存在唯一的点 $\xi \in \bigcap_{n=1}^{\infty} [m_n, M_n]$，下证 $\lim_{x \to \infty} f(x) = \xi$。
+
+对于任意 $\epsilon > 0$，存在 $N$，当 $n > N$ 时，$[m_n, M_n] \subset (\xi - \epsilon, \xi + \epsilon)$。取 $n_0 > N$，存在 $X > 0$，当 $x > X$ 时，$f(x) \in (m_{n_0}, M_{n_0})$，于是当 $x > X$ 时，有 $|f(x) - \xi| < M_{n_0} - m_{n_0} < 2\epsilon$。
+
+$\epsilon$ 任意，因此 $\lim_{x \to \infty} f(x) = \xi$ 即 $\lim_{x \to \infty} f(x)$ 存在。
+\end{proof}
+
+\subsection{可微函数作业题}
+\subsubsection*{1.5.1}
+设 $f(x)$ 在 $[a, b]$ 上连续，在 $(a, b)$ 内可导，试证：存在点 $\xi \in (a, b)$ 使得
+\[
+f(\xi) - f(a) = f'(\xi)(b - \xi)。
+\]
+\begin{proof}
+要证 $f(\xi) - f(a) = f'(\xi)(b - \xi)$，只需证 
+\[
+(b - \xi)f'(\xi) - [f(\xi) - f(a)] = 0
+\] 
+即可。
+
+构造函数 $F(x) = (b - x)[f(x) - f(a)]$，由题设可知，显然 $F(x)$ 在 $[a, b]$ 上连续，在 $(a, b)$ 上可导。
+
+观察函数 $F(x)$ 可知，$F(a) = F(b) = 0$，因此 $F(x)$ 在 $[a, b]$ 上满足罗尔定理，由罗尔定理可知，存在一点 $\xi \in (a, b)$，满足 $F'(\xi) = 0$。
+
+由 $F'(x) = (b - x)f'(x) - [f(x) - f(a)]$ 可知
+\[
+F'(\xi) = (b - \xi)f'(\xi) - [f(\xi) - f(a)] = 0 \iff f(\xi) - f(a) = f'(\xi)(b - \xi)。
+\]
+\end{proof}
+
+\subsubsection*{1.5.3}
+设 $f(x), g(x)$ 在 $[a, b]$ 上连续，在 $(a, b)$ 内可导，$g(x) \neq 0$，且有 $f(a)g(b) = f(b)g(a)$。试证：存在点 $\xi \in (a, b)$ 使得
+\[
+f'(\xi)g(\xi) = f(\xi)g'(\xi)。
+\]
+\begin{proof}
+构造 $F(x) = \frac{f(x)}{g(x)}$，由题设可知，$F(x)$ 在 $[a, b]$ 上连续，在 $(a, b)$ 上可导，且 $F(a) = F(b) = 0$。
+
+显然 $F(x)$ 在 $[a, b]$ 上满足罗尔定理，故至少存在一点 $\xi \in (a, b)$，满足 $F'(\xi) = 0$。
+
+计算 $F'(x)$：
+\[
+F'(x) = \frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}
+\]
+因此
+\[
+\frac{f'(\xi)g(\xi) - f(\xi)g'(\xi)}{g^2(\xi)} = 0 \quad \text{且} \quad g(\xi) \neq 0，
+\]
+故
+\[
+f'(\xi)g(\xi) = f(\xi)g'(\xi)。
+\]
+\end{proof}
+
+\subsubsection*{1.5.4}
+设 $f(x)$ 在 $[0, 3]$ 上连续，在 $(0, 3)$ 内可导，且
+\[
+f(0) + f(1) + f(2) = 3, \quad f(3) = 1,
+\]
+试证：存在点 $\xi \in (0,3)$ 使得 $f'(\xi) = 0$。
+\begin{proof}
+$f(x)$ 在 $[0, 3]$ 上连续，所以 $f(x)$ 在 $[0, 2]$ 上也连续，从而 $f(x)$ 在 $[0, 2]$ 上可取到最大值 $M$ 和最小值 $m$，于是
+\[
+m \leq f(0) \leq m, \quad m \leq f(1) \leq m, \quad m \leq f(2) \leq M \implies m \leq \frac{f(0) + f(1) + f(2)}{3} \leq M.
+\]
+由介值定理可知，至少存在一点 $\zeta \in [0, 2]$，使得
+\[
+f(\zeta) = \frac{f(0) + f(1) + f(2)}{3} = 1.
+\]
+又因为 $f(x)$ 在 $[\zeta, 3] \subset [0, 3]$ 上连续，在 $(\zeta, 3)$ 上可导，且 $f(\zeta) = 1 = f(3)$，由罗尔定理可知，必存在一点 $\xi \in (\zeta, 3) \subset (0, 3)$，使得
+\[
+f'(\xi) = 0.
+\]
+\end{proof}
+
+\subsubsection*{1.5.5}
+设 $x_1 = 14$, $x_{n+1} = \sqrt{2 + x_n} \ (n = 1, 2, 3, \cdots)$。
+
+(1) 求 $\lim_{n \to \infty} x_n$；
+
+(2) 求 $\lim_{n \to \infty} \left( \frac{4(x_{n+1} - 2)}{x_n - 2} \right)^{\frac{1}{x_n - 2}}$。
+\begin{proof}
+
+\textbf{解5-1：} 不难发现对于 $n \in \mathbb{Z}^+$，都有 $x_n > 0$，首先通过做差法考虑数列的单调性：
+\[
+x_{n+1} - x_n = \sqrt{2 + x_n} - \sqrt{2 + x_{n-1}} = \frac{x_n - x_{n-1}}{\sqrt{2 + x_n} + \sqrt{2 + x_{n-1}}}.
+\]
+
+从第一个等式可以看出 $x_{n+1} - x_n$ 的正负性与 $x_n - x_{n-1}$ 有关，递推可知 $x_{n+1} - x_n \leq x_2 - x_1$，由 $x_2 - x_1 = \sqrt{2 + 14} - 14 = -10 < 0$。
+
+因此显然 $x_n$ 单调递减，结合第二个等式显然可得知 $x_n$ 有下界 2。由单调有界定理，不动点定理和压缩映射定理可知 $\sqrt{2 + A} = A$，显然 $A = 2$ （此数列的非负性），因此：
+\[
+\lim_{n \to \infty} x_n = A = 2。
+\]
+
+\textbf{解5-2：} 结合 5-1 结论，令 $I = \lim_{n \to \infty} \left( \frac{4(x_{n+1} - 2)}{x_n - 2} \right)^{\frac{1}{x_n - 2}}$，做出变量替换 $x_n - 2 = t$，$t \to 0$。
+
+\[
+I = \lim_{t \to 0} \left( \frac{4(\sqrt{t+4} - 2)}{t} \right)^{\frac{1}{t}} = \lim_{t \to 0} \left( 1 - t + 4(\sqrt{t + 4} - 2) \right)^{\frac{-t}{t + 4(\sqrt{t + 4} - 2)}}.
+\]
+
+利用洛必达法则得：
+\[
+\lim_{t \to 0} \frac{-t}{t + 4(\sqrt{t + 4} - 2)} = \lim_{t \to 0} \frac{-1}{1 + \frac{4}{2\sqrt{t + 4}}} = \frac{-1}{4}。
+\]
+
+故：
+\[
+I = e^{-\frac{1}{16}}。
+\]
+\end{proof}
+
+\subsubsection*{1.5.6}
+设 $f(x)$ 在 $[a,b]$ 上有二阶导数，且满足 $f'(a) = f'(b) = 0$。试证：存在点 $\xi \in (a,b)$ 使得
+\[
+|f''(\xi)| \geq 4 \frac{|f(b) - f(a)|}{(b-a)^2}.
+\]
+\begin{proof}
+由泰勒定理，对 $\forall x \in (a,b)$，均存在对应的 $\xi_1, \xi_2 \in (a,b)$，使得
+\[
+f(x) = 
+\begin{cases}
+f(a) + f'(a)(x-a) + \frac{f''(\xi_1)}{2!}(x-a)^2, \\
+f(b) + f'(b)(x-b) + \frac{f''(\xi_2)}{2!}(x-b)^2
+\end{cases}
+\]
+结合 $f'(a) = f'(b) = 0$，上面两式相减有
+\[
+|f(b) - f(a)| = \left| \frac{1}{2} f''(\xi_1)(x-a)^2 - \frac{1}{2}f''(\xi_2)(x-b)^2 \right|.
+\]
+观察题证等式，令 $x = \frac{a+b}{2}$，此时 $(x-a)^2 = (x-b)^2 = \frac{(b-a)^2}{4}$，带入上述表达式可得
+\[
+|f(b) - f(a)| = \frac{1}{8}(b-a)^2 \cdot |f''(\xi_1) - f''(\xi_2)|.
+\]
+令 $|f''(\xi)| = \max\{|f''(\xi_1)|, |f''(\xi_2)|\}$，则
+\[
+|f(b) - f(a)| \leq \frac{1}{8}(b-a)^2 \cdot 2|f''(\xi)|.
+\]
+因此有
+\[
+|f(b) - f(a)| \leq \frac{1}{4}(b-a)^2 |f''(\xi)|,
+\]
+即
+\[
+|f''(\xi)| \geq 4 \frac{|f(b) - f(a)|}{(b-a)^2}.
+\]
+\end{proof}
+
+\subsubsection*{1.5.7}
+设 $f(x)$ 有 $n+1$ 阶导数，满足
+\[
+f(a+h) = f(a) + f'(a)h + \frac{f''(a)}{2!}h^2 + \cdots + \frac{f^{(n)}(a+\theta h)}{n!}h^n,
+\]
+其中 $0 < \theta < 1$，且 $f^{(n+1)}(a) \neq 0$。试证：
+\[
+\lim_{h \to 0} \theta = \frac{1}{n+1}。
+\]
+
+\begin{proof}
+已知 $f(x)$ 是区间上 $n+1$ 阶可导函数，所以 $f(a+h)$ 本可以展开到 $h^{n+1}$，即有
+\[
+f(a+h) = f(a) + f'(a)h + \frac{f''(a)}{2!}h^2 + \cdots + \frac{f^{(n)}(a)}{n!}h^n + \frac{f^{(n+1)}(\eta)}{(n+1)!}h^{n+1},
+\]
+其中 $\eta \in (a, b)$。
+
+上面两式作差化简后得
+\[
+\frac{f^{(n+1)}(\eta)}{(n+1)}h = f^{(n)}(a + \theta h) - f^{(n)}(a)。
+\]
+
+拉格朗日中值定理得存在 $\xi \in (a, a + h)$，使得
+\[
+f^{(n)}(a + \theta h) - f^{(n)}(a) = f^{(n+1)}(\xi) \cdot \theta h,
+\]
+带入得
+\[
+\frac{f^{(n+1)}(\eta)}{(n+1)} = f^{(n+1)}(\xi) \cdot \theta。
+\]
+
+现在利用 $f^{(n+1)}(x)$ 的连续性，结合 $\xi, \eta \to a$ ($h \to 0$)，对上述两端关于 $h \to 0$ 取极限有
+\[
+\frac{f^{(n+1)}(a)}{(n+1)} = f^{(n+1)}(a) \cdot \lim_{h \to 0} \theta。
+\]
+
+再结合 $f^{(n+1)}(a) \neq 0$ 可得证
+\[
+\lim_{h \to 0} \theta = \frac{1}{n+1}。
+\]
+\end{proof}
+
+\subsubsection*{1.5.8}
+设
+\[
+y = x^3 \ln(1+x),
+\]
+求 $y^{(99)}(0)$。
+
+\begin{proof}
+观察变量形式，根据麦克劳林展开式可得
+\[
+y = x^3 \cdot \sum_{n=1}^\infty (-1)^{n-1} \frac{x^n}{n} = \sum_{n=1}^\infty (-1)^{n-1} \frac{x^{n+3}}{n}.
+\]
+
+又由 Taylor 展开式
+\[
+y = y(0) + y'(0)x + \frac{y''(0)}{2}x^2 + \cdots + \frac{y^{(99)}(0)}{99!}x^{99} + \cdots
+\]
+
+故而由其唯一性可知，有 $n+3=99$，即 $n=96$，此时
+\[
+y^{(99)}(0) = (-1)^{96-1} \frac{99!}{96} \implies y^{(99)}(0) = -\frac{99!}{96}.
+\]
+\end{proof}
+
+\subsubsection*{1.5.9}
+试比较 $2023^{2024}$ 和 $2024^{2023}$ 的大小。
+
+\begin{proof}
+观察发现 $2024 > 2023 > e$，构造函数 $f(x) = \frac{\ln x}{x}$，观察 $f(x)$ 在 $(e, +\infty)$ 上的单调性。
+
+\[
+f'(x) = \frac{(\ln x)' \cdot x - x' \cdot \ln x}{x^2} = \frac{1 - \ln x}{x^2} < 0, \quad x \in (e, +\infty)
+\]
+
+显然，$f(x)$ 在 $(e, +\infty)$ 上单调递减，即 $f(2024) < f(2023)$。
+
+\[
+0 < \frac{\ln 2024}{2024} < \frac{\ln 2023}{2023} \implies 2023 \ln 2024 < 2024 \ln 2023 \implies \ln 2024^{2023} < \ln 2023^{2024}
+\]
+
+显然
+\[
+2024^{2023} < 2023^{2024}.
+\]
+\end{proof}
+
+\subsubsection*{1.5.10}
+就 $k$ 的不同取值情况，讨论方程
+\[
+x - \frac{\pi}{2} \sin x = k
+\]
+在区间 $\left(0, \frac{\pi}{2}\right)$ 内根的个数。
+
+\begin{proof}
+观察方程形式，构造函数
+\[
+f(x) = x - \frac{\pi}{2} \sin x,
+\]
+研究 $f(x)$ 在 $\left(0, \frac{\pi}{2}\right)$ 上的单调性。
+
+计算 $f'(x)$，得
+\[
+f'(x) = 1 - \frac{\pi}{2} \cos x.
+\]
+令 $f'(x) = 0$，可得驻点
+\[
+x_0 = \arccos \frac{2}{\pi}.
+\]
+结合 $f(0) = f\left(\frac{\pi}{2}\right) = 0$，研究 $y = f(x)$ 与 $y = k$ 的交点。
+
+分情况讨论：
+\begin{itemize}
+    \item[i.] 当 $k \geq 0$ 或 $k < f\left(\arccos \frac{2}{\pi}\right)$ 时，原方程没有根；
+    \item[ii.] 当 $k = f\left(\arccos \frac{2}{\pi}\right)$ 时，原方程有一个根；
+    \item[iii.] 当 $f\left(\arccos \frac{2}{\pi}\right) < k < 0$ 时，原方程有两个根。
+\end{itemize}
+\end{proof}
+
+\subsubsection*{1.5.11}
+设 $p(x)$ 是一个多项式，试证：
+\begin{enumerate}
+    \item $\lim_{x \to \infty} \frac{p(x)}{e^{|x|}} = 0$;
+    \item $\lim_{x \to \infty} \frac{p(x)}{e^{x^2}} = 0$.
+\end{enumerate}
+
+\begin{proof}
+解11-1：不妨设 $p(x) = a_0 + a_1 x + \cdots + a_n x^n \, (n \in \mathbb{Z}^+, a_n \in \mathbb{R})$，我们有 $p^{(n)}(x) = n! a_n$。
+
+先考虑 $x > 0$ 的情况，此时
+\[
+\lim_{x \to \infty} \frac{p(x)}{e^{|x|}} = \lim_{x \to \infty} \frac{p(x)}{e^x}，
+\]
+此时 $p(x), e^x \to \infty \, (x \to +\infty)$，洛必达法则
+\[
+\lim_{x \to \infty} \frac{p(x)}{e^x} = \lim_{x \to \infty} \frac{p^{(n)}(x)}{(e^x)^{(n)}} = \lim_{x \to \infty} \frac{n! a_n}{e^x} = 0。
+\]
+
+同理 $x < 0$ 的情况，$p(x), e^{|x|} \to \infty \, (x \to -\infty)$，显然可以得到相同的结论。
+
+因此，综上所述
+\[
+\lim_{x \to \infty} \frac{p(x)}{e^{|x|}} = 0。
+\]
+
+解11-2：参考 11-1 的解法，
+\[
+\lim_{x \to \infty} \frac{p(x)}{e^{x^2}} = 0，
+\]
+分子有限次求导后结果为 $0$，而分母任意阶导数在 $x \to \infty$ 时都是无穷大量，反复使用洛必达法则即可得
+\[
+\lim_{x \to \infty} \frac{p(x)}{e^{x^2}} = 0。
+\]
+\end{proof}
+
+\subsubsection*{1.5.12}
+定义函数
+\[
+f(x) =
+\begin{cases}
+e^{-x^{-2}}, & \text{当 } x \neq 0; \\
+0, & \text{当 } x = 0.
+\end{cases}
+\]
+
+\begin{enumerate}
+\item 对任意正整数 $n$，总是有多项式 $p_n(x)$ 使得当 $x \neq 0$ 时
+\[
+f^{(n)}(x) = p_n\left(\frac{1}{x}\right)e^{-x^{-2}};
+\]
+\item $f^{(n)}(0) = 0, \quad n = 0, 1, 2, \dots.$
+\end{enumerate}
+
+\begin{proof}
+\textbf{解12-1: 使用数学归纳法}
+\begin{enumerate}
+    \item 当 $n=1$ 时，$f'(x) = \frac{2}{x^3}e^{-x^{-2}}$ 可知结论成立。
+    \item 现在设 $f^{(k)}(x) = p_k\left(\frac{1}{x}\right)e^{-x^{-2}}$ 成立，其中 $p_k\left(\frac{1}{x}\right)$ 是 $\frac{1}{x}$ 的多项式。
+    \item 则
+    \[
+    f^{(k+1)}(x) = p_k'\left(\frac{1}{x}\right)\left(-\frac{1}{x^2}\right)e^{-x^{-2}} + p_k\left(\frac{1}{x}\right)\left(\frac{2}{x^3}\right)e^{-x^{-2}} = p_{k+1}\left(\frac{1}{x}\right)e^{-x^{-2}},
+    \]
+    其中
+    \[
+    p_{k+1}\left(\frac{1}{x}\right) = \frac{2}{x^3}p_k\left(\frac{1}{x}\right) - \frac{1}{x^2}p_k'\left(\frac{1}{x}\right)
+    \]
+    仍是 $\frac{1}{x}$ 的多项式。因此假设成立，故对任意正整数 $n$，总是有多项式 $p_n(x)$ 使得当 $x \neq 0$ 时有
+    \[
+    f^{(n)}(x) = p_n\left(\frac{1}{x}\right)e^{-x^{-2}}。
+    \]
+\end{enumerate}
+
+\textbf{解12-2:}
+结合 11-2 和 12-1 两个结论，再用数学归纳法证明本题：
+\begin{enumerate}
+    \item 当 $n=1$ 时，有
+    \[
+    f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x} = \lim_{x \to 0} \frac{e^{-x^{-2}} - 0}{x} \overset{y = \frac{1}{x}}{=} \lim_{y \to +\infty} \frac{e^{-y^2}}{\frac{1}{y}} = \lim_{y \to +\infty} \frac{y}{e^{y^2}} = 0。
+    \]
+    \item 现在设 $f^{(k)}(0) = 0$ 成立。
+    \item 则
+    \[
+    f^{(k+1)}(0) = \lim_{x \to 0} \frac{f^{(k)}(x) - f^{(k)}(0)}{x} = \lim_{x \to 0} \frac{p_k\left(\frac{1}{x}\right)e^{-x^{-2}}}{x} \overset{y = \frac{1}{x}}{=} \lim_{y \to +\infty} \frac{p_k(y)e^{-y^2}}{\frac{1}{y}} = 0。
+    \]
+\end{enumerate}
+
+综上所述，
+\[
+f^{(n)}(0) = 0 \quad (n = 1, 2, 3, \dots)。
+\]
+\end{proof}
+
+\subsubsection*{1.5.13}
+
+设 $f(x)$ 在全实轴上可导，且有实数 $A$ 使得
+\[
+\lim_{x \to +\infty} \left( f(x) + x f'(x) \right) = A.
+\]
+试证：
+\[
+\lim_{x \to +\infty} f(x) = A.
+\]
+
+\begin{proof}
+设函数 $f$ 和 $g$ 在 $(a, b)$ 上可导，$g(x) \neq 0$ 且 $\lim_{x \to a^+} g(x) = \infty$。如果极限
+\[
+\lim_{x \to a^+} \frac{f'(x)}{g'(x)}
+\]
+存在，那么
+\[
+\lim_{x \to a^+} \frac{f'(x)}{g'(x)} = \lim_{x \to a^+} \frac{f(x)}{g(x)}.
+\]
+
+证明如下：
+
+令
+\[
+\lim_{x \to a^+} \frac{f'(x)}{g'(x)} = l \in \mathbb{R},
+\]
+对任意给定的 $\varepsilon > 0$，存在一个 $\delta > 0$，当 $x \in (a, a + \delta)$ 时，有
+\[
+l - \varepsilon < \frac{f'(x)}{g'(x)} < l + \varepsilon.
+\]
+因此对 $(x, c) \subset (a, a + \delta)$，根据 Cauchy 中值定理，必存在 $\xi \in (x, c)$，使得
+\[
+l - \varepsilon < \frac{f(x) - f(c)}{g(x) - g(c)} = \frac{f'(\xi)}{g'(\xi)} < l + \varepsilon.
+\]
+固定 $c$，对 $x \to a^+$ 取上极限，得
+\[
+\limsup_{x \to a^+} \frac{f(x)}{g(x)} \leq l + \varepsilon.
+\]
+
+令 $\varepsilon \to 0$，得
+\[
+\limsup_{x \to a^+} \frac{f(x)}{g(x)} \leq l.
+\]
+
+同理可得
+\[
+\liminf_{x \to a^+} \frac{f(x)}{g(x)} \geq l.
+\]
+
+因此
+\[
+\lim_{x \to a^+} \frac{f(x)}{g(x)} = l \implies \lim_{x \to a^+} \frac{f'(x)}{g'(x)} = \lim_{x \to a^+} \frac{f(x)}{g(x)} = l.
+\]
+
+令 $h(x) = x f(x), g(x) = x$，由题目可知，$h'(x), g(x), f(x), h(x)$ 在 $\mathbb{R}$ 上均可导。
+
+分别令 $a = \pm \infty$，即可得到
+\[
+\frac{h'(x)}{g'(x)} = \lim_{x \to \infty} \frac{h(x)}{g(x)} = \lim_{x \to \infty} f(x) = A.
+\]
+
+因此
+\[
+\lim_{x \to \infty} f(x) = A.
+\]
+\end{proof}
+
+\subsubsection*{1.5.14}
+
+设 $a = \sqrt[3]{3}$，$x_1 = a$，$x_{n+1} = a^{x_n} \, (n = 1, 2, \cdots)$。
+
+试证：
+\begin{enumerate}
+    \item $\lim_{n \to \infty} x_n$ 存在；
+    \item $\lim_{n \to \infty} x_n \neq 3$。
+\end{enumerate}
+
+\begin{proof}
+\textbf{解14-(1)}首先用数学归纳法证明对 $\forall n \in \mathbb{Z}^+$，都有 $\sqrt[3]{3} \leq x_n < 3$。
+
+\begin{enumerate}
+    \item 对 $n = 1, 2$ 显然有 $\sqrt[3]{3} \leq x_1 < x_2 < 3$；
+    \item 现在设当 $k = n$ 时，$\sqrt[3]{3} \leq x_n < 3$ 仍成立；
+    \item 当 $k = n + 1$ 时，显然 $\sqrt[3]{3} \leq x_n < x_{n+1} = a^{x_n} = a^{a^n} < 3$ 成立。
+\end{enumerate}
+
+因此，对 $\forall n \in \mathbb{Z}^+$，都有 $\sqrt[3]{3} \leq x_n < 3$，从而得到 $x_n$ 有界。
+
+然后通过做差法研究 $x_n$ 的单调性：
+
+\[
+x_{n+2} - x_{n+1} = a^{x_{n+1}} - a^{x_n} = a^{x_n} \left( a^{x_{n+1} - x_n} - 1 \right) = a^{x_n} \left( a^{x_{n+1} - x_n} - 1 \right), \quad [a^n > 0, a^0 = 1].
+\]
+
+不难看出 $x_{n+2} - x_{n+1}$ 的正负性与 $x_{n+1} - x_n$ 相同，反复递代可知只与 $x_2 - x_1$ 的正负性有关。
+
+$x_2 - x_1 > 0$，因此对 $\forall n \in \mathbb{Z}^+$，都有 $x_{n+1} - x_n > 0$，易知 $x_n$ 单调递增。
+
+由单调有界定理可知，数列 $x_n$ 必有极限，即
+\[
+\lim_{n \to \infty} x_n \text{ 存在}.
+\]
+
+\textbf{解14-(2)}
+首先构造函数 $h(x) = \frac{\ln x}{x}$，研究 $h(x)$ 的单调性。$h'(x) = \frac{1 - \ln x}{x^2} = 0$（$x = e$）$h(x)$ 在 $(0, e)$ 上单调递增，在 $(e, +\infty)$ 上单调递减。在 $(0, +\infty)$ 上有极大值 $\frac{1}{e}$。
+
+再构造函数 $p(x) = x^x$，不难看出 $p(x) = \frac{1}{e} e^{x \ln x} = e^{h(x)}$，因此有 $p(3) < p(e) \implies 3^{\frac{1}{e}} < \frac{1}{e}$。
+
+考虑方程 $f(x) = x^x$ 的不动点问题，令 $g(x) = x - a^x$，显然 $g(x) = 0$ 的解就是 $f(x)$ 的不动点。
+
+$g'(x) = a^x \ln a - 1, g''(x) = a^x (\ln a)^2 > 0$，显然 $g(x)$ 单调递增。当 $g'(x) < 0$ 时，$x^* = -\frac{\ln a}{\ln a}$。
+
+因此 $g(x)$ 有最小值 $g(x) = \frac{1 + \ln \ln a}{\ln a}$，当 $g'(x) < 0$ 时，解得 $x^* = \frac{1}{e^e}$。
+
+当 $1 < a = \frac{1}{33}$ 时，由于 $g(x) = 0$ 是凸函数，$g(x) = 0$ 有且仅有两个根，分别令其为 $x_1, x_2$，它们是 $f(x)$ 的两个不动点，不失一般性，令 $x_1 < x^* < x_2$。
+
+\begin{enumerate}
+    \item 对于 $x_2 = x^* = -\frac{\ln \ln a}{\ln a}$，由于 $a^{x^2} = x_2$，可得 $|f'(x_2)| = |a^{x^2} \ln a| = x_2 \ln a > -\ln a > 1$。
+    \item 对于 $x_1 < x^*$，由于 $f'(x) = x^{x_1} \ln a$，可得 $|f'(x_1)| = |a^{x_1} \ln a| = f(x) \ln a < 1$。
+\end{enumerate}
+
+因此，当 $1 < a < e^{e}$ 时，$f(x)$ 有且仅有两个不动点，且较小的点为稳定的不动点，较大的点为不稳定的不动点。
+
+对于 $g(x) = 0$，显然有一个解 $x = 3$，但
+\[
+3 - x = 3 + \frac{\ln a}{\ln \ln 3} = 3 + \frac{\ln (3 \ln 3)}{\ln 3} = 3 (\ln 3 \ln \ln 3).
+\]
+
+显然 $x_2 = 3$ 是较大的不稳定的不动点，故 $f(x)$ 不可能收敛于 $x_2 = 3$。因此，可得
+\[
+\lim_{n \to \infty} x_n \neq 3.
+\]
+\end{proof}
+
+\subsection{函数性质作业题}
+\subsubsection*{1.6.1}
+设 $n$ 为正整数，函数
+\[
+f(x) =
+\begin{cases} 
+x^n \sin \ln |x|, & x \neq 0; \\
+0, & x = 0.
+\end{cases}
+\]
+
+试证：$f$ 在 $x = 0$ 处有 $n-1$ 阶导数，但 $f^{(n)}(0)$ 不存在。
+
+\begin{proof}
+当 $n = 1$ 时，由于
+\[
+\lim_{x \to 0} \frac{f(x) - f(0)}{x} = \lim_{x \to 0} \frac{x^2 \sin (\ln |x|) - 0}{x} = \lim_{x \to 0} x \sin (\ln |x|) = 0,
+\]
+所以 $f'(0) = 0$。
+
+又因为
+\[
+f'(x) =
+\begin{cases}
+2x \sin (\ln |x|) + x \cos (\ln x), & x > 0, \\
+2x \sin (\ln |x|) + x \cos (\ln (-x)), & x < 0,
+\end{cases}
+\]
+所以
+\[
+f''(x) =
+\begin{cases}
+x \big( 2 \sin (\ln |x|) + \cos (\ln |x|) \big), & x \neq 0, \\
+0, & x = 0.
+\end{cases}
+\]
+
+由于
+\[
+\lim_{x \to 0} \frac{f'(x) - f'(0)}{x} = \lim_{x \to 0} \frac{x \big( 2 \sin (\ln |x|) + \cos (\ln |x|) \big) - 0}{x} 
+= \lim_{x \to 0} \big( 2 \sin (\ln |x|) + \cos (\ln |x|) \big),
+\]
+不存在，因此 $f''(0)$ 不存在。
+
+假设 $n = k$ 时，结论成立。当 $n = k + 1$ 时，可得
+\[
+f'(x) =
+\begin{cases}
+x^{k+1} \big( (k + 2) \sin (\ln |x|) + \cos (\ln |x|) \big), & x \neq 0, \\
+0, & x = 0.
+\end{cases}
+\]
+
+类似证明，结论成立。
+
+由此可知，当 $f$ 在 $x = 0$ 处有 $n - 1$ 阶导数，必有 $f^{(n)}(0)$ 不存在。
+\end{proof}
+
+\subsubsection*{1.6.2}
+
+试构造可微函数 $f(x)$ 使得 $f'(0) > 0$，但对任意 $\delta > 0$，$f(x)$ 在开区间 $(-\delta, \delta)$ 上都不是递增函数。
+
+\begin{proof}
+设
+\[
+f(x) =
+\begin{cases}
+\frac{x}{2} + x^2 \sin \frac{1}{x}, & x \neq 0; \\
+0, & x = 0.
+\end{cases}
+\]
+
+计算导数，首先验证 $x = 0$ 时：
+\[
+f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x} = \lim_{x \to 0} \frac{\frac{x}{2} + x^2 \sin \frac{1}{x} - 0}{x}
+= \lim_{x \to 0} \left( \frac{1}{2} + x \sin \frac{1}{x} \right) = \frac{1}{2} > 0.
+\]
+
+对于 $x \neq 0$，$f'(x)$ 为：
+\[
+f'(x) = \frac{1}{2} - \cos \frac{1}{x} + 2x \sin \frac{1}{x}.
+\]
+
+当 $x_k = \frac{1}{k\pi} \, (k = 1, 2, \dots)$ 时，
+\[
+f'(x_k) = \frac{1}{2} - (-1)^k.
+\]
+
+从上述公式可见，在包含零点的任意开区间内，$f'(x)$ 可以取不同符号的值。因此，$f(x)$ 在该开区间内不是单调函数。
+\end{proof}
+
+\subsubsection*{1.6.3}
+
+试构造在整个实数轴上可导的函数 $f(x)$，使得对任意给定的 $\delta > 0$ 和 $\xi \in \mathbb{R}$，总是有一个点列
+\[
+x_n \in (0, \delta), \quad n = 1, 2, 3, \dots
+\]
+使得
+\[
+\lim_{n \to \infty} x_n = 0, \quad \text{并且} \quad f'(x_n) = \xi.
+\]
+\begin{proof}
+定义函数
+\[
+f(x) =
+\begin{cases}
+x \sin \left( \frac{1}{x} \right), & x \neq 0, \\
+0, & x = 0.
+\end{cases}
+\]
+
+1. $f(x)$ 在整个实数轴上可导：当 $x \neq 0$ 时，有
+\[
+f'(x) = \sin \left( \frac{1}{x} \right) - \frac{\cos \left( \frac{1}{x} \right)}{x}.
+\]
+
+当 $x = 0$ 时，计算
+\[
+f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x} = \lim_{x \to 0} \sin \left( \frac{1}{x} \right) = 0.
+\]
+
+2. 导数为任意值 $\xi$ 的点列：选择点列 $x_n = \frac{1}{n\pi + \arccos(-\xi)}$，有
+\[
+f'(x_n) = \sin \left( \frac{1}{x_n} \right) - \frac{\cos \left( \frac{1}{x_n} \right)}{x_n} = \xi.
+\]
+
+3. $\lim_{n \to \infty} x_n = 0$：因为 $x_n = \frac{1}{n\pi + \arccos(-\xi)}$，随着 $n \to \infty$，有 $\lim_{n \to \infty} x_n = 0$。
+
+综上，函数 $f(x)$ 满足题意。
+\end{proof}
+
+\subsubsection*{1.6.4}
+
+试构造可微函数 $f(x)$ 使得 $f'(0) > 0$，但对任意 $\delta > 0$，$f(x)$ 在开区间 $(-\delta, \delta)$ 上都不是递增函数。
+
+\begin{proof}
+设
+\[
+f(x) =
+\begin{cases}
+\frac{x}{2} + x^2 \sin \frac{1}{x}, & x \neq 0; \\
+0, & x = 0.
+\end{cases}
+\]
+
+计算导数，首先验证 $x = 0$ 时：
+\[
+f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x} = \lim_{x \to 0} \frac{\frac{x}{2} + x^2 \sin \frac{1}{x} - 0}{x}
+= \lim_{x \to 0} \left( \frac{1}{2} + x \sin \frac{1}{x} \right) = \frac{1}{2} > 0.
+\]
+
+对于 $x \neq 0$，$f'(x)$ 为：
+\[
+f'(x) = \frac{1}{2} - \cos \frac{1}{x} + 2x \sin \frac{1}{x}.
+\]
+
+当 $x_k = \frac{1}{k\pi} \, (k = 1, 2, \dots)$ 时，
+\[
+f'(x_k) = \frac{1}{2} - (-1)^k.
+\]
+
+从上述公式可见，在包含零点的任意开区间内，$f'(x)$ 可以取不同符号的值。因此，$f(x)$ 在该开区间内不是单调函数。
+\end{proof}
+
+\subsubsection*{1.6.5}
+
+试构造在整个实数轴上有任意阶导数的函数 $f(x)$，使得 $f(x)$ 的任意阶 Maclaurin 多项式都等于零，但对任意 $x \neq 0$，都有
+\[
+f(x) > 0.
+\]
+\begin{proof}
+从可微函数）第 12 题（1.5.12）可以得到如下结论：
+
+设
+\[
+f(x) =
+\begin{cases}
+e^{-x^{-2}}, & x \neq 0; \\
+0, & x = 0.
+\end{cases}
+\]
+
+有
+\[
+f^{(n)}(0) = 0.
+\]
+
+由此结论可知，此函数在 $x = 0$ 这一点的泰勒展开式为零多项式，即此函数的任意阶 Maclaurin 多项式都等于零，且满足题干所要求的值域问题。
+\end{proof}
+
+\subsection{积分作业题}
+\subsubsection*{1.7.1}
+
+求积分
+\[
+I = \int_{0}^{2} \frac{x}{e^x + e^{2-x}} \, \mathrm{d}x.
+\]
+
+\begin{proof}
+设
+\[
+I = \int_{0}^{2} \frac{x}{e^x + e^{2-x}} \, \mathrm{d}x = I_1 + I_2,
+\]
+其中
+\[
+I_1 = \int_{0}^{1} \frac{x}{e^x + e^{2-x}} \, \mathrm{d}x, \quad I_2 = \int_{1}^{2} \frac{x}{e^x + e^{2-x}} \, \mathrm{d}x.
+\]
+
+对于 $I_2$，作变量替换 $t = 2 - x$，则有
+\[
+I_2 = \int_{1}^{2} \frac{2 - x}{e^x + e^{2-x}} \, \mathrm{d}x = \int_{0}^{1} \frac{t}{e^{2-t} + e^t} \, \mathrm{d}t.
+\]
+注意到 $I_2 = -I_1 + \int_{0}^{1} \frac{2}{e^x + e^{2-x}} \, \mathrm{d}x$。
+
+因此
+\[
+I = I_1 + I_2 = 2 \int_{0}^{1} \frac{\mathrm{d}x}{e^x + e^{2-x}}.
+\]
+
+令 $t = e^x$，则
+\[
+\int_{0}^{1} \frac{\mathrm{d}x}{e^x + e^{2-x}} = \int_{1}^{e} \frac{\mathrm{d}t}{t^2 + e^2}.
+\]
+从而
+\[
+I = \frac{2}{e} \arctan \frac{t}{e} \bigg|_{1}^{e} = \frac{2}{e} \left( \arctan 1 - \arctan \frac{1}{e} \right).
+\]
+
+计算得
+\[
+I = \frac{2}{e} \left( \frac{\pi}{4} - \arctan \frac{1}{e} \right).
+\]
+\end{proof}
+
+\subsubsection*{1.7.2}
+
+设函数 $f$ 是 $[0, 1]$ 上的连续函数，且满足
+\[
+\int_{0}^{1} x^n f(x) \, \mathrm{d}x = 1, \quad \int_{0}^{1} x^k f(x) \, \mathrm{d}x = 0, \quad k = 0, 1, \dots, n-1.
+\]
+
+试证：
+\[
+\max_{0 \leq x \leq 1} |f(x)| \geq 2^n (n + 1).
+\]
+
+\begin{proof}
+此题可化简为证明：存在 $\xi \in [0, 1]$，使得 $|f(\xi)| \geq 2^n(n+1)$。
+
+使用反证法，假设对 $\forall x \in [0, 1]$，$|f(x)| < 2^n(n+1)$，则
+\[
+I = \int_{0}^{1} x^n f(x) \, \mathrm{d}x = \int_{0}^{1} (x - \frac{1}{2})^n f(x) \, \mathrm{d}x.
+\]
+根据绝对值不等式，有
+\[
+\leq \int_{0}^{1} |(x - \frac{1}{2})^n| \cdot |f(x)| \, \mathrm{d}x < 2^n(n+1) \int_{0}^{1} |(x - \frac{1}{2})^n| \, \mathrm{d}x.
+\]
+\[
+= 2^n(n+1) \left[\int_{0}^{1/2} (x - \frac{1}{2})^n \, \mathrm{d}x + \int_{1/2}^{1} (x - \frac{1}{2})^n \, \mathrm{d}x \right].
+\]
+\[
+< 2^n(n+1) \cdot 2 \int_{0}^{1/2} (x - \frac{1}{2})^n \, \mathrm{d}x = 2^{n+1}(n+1) \cdot \frac{1}{n+1} (x - \frac{1}{2})^{n+1} \bigg|_{0}^{1/2} = 1.
+\]
+
+矛盾。因此，必定存在 $\xi \in [0, 1]$，使得 $|f(\xi)| \geq 2^n(n+1)$。
+
+从而
+\[
+\max_{0 \leq x \leq 1} |f(x)| \geq 2^n(n+1).
+\]
+\end{proof}
+
+\subsubsection*{1.7.3}
+
+设函数 $f$ 在 $[0, 1]$ 上有二阶连续导数，$f(0) = f(1) = 0$，且当 $x \in (0, 1)$ 时 $f(x) \neq 0$。试证：
+\[
+\int_{0}^{1} \left| \frac{f''(x)}{f(x)} \right| \, \mathrm{d}x \geq 4.
+\]
+
+\begin{proof}
+利用连续函数性质及拉格朗日微分中值定理证明。
+
+由于题意，设 $f(x)$ 在 $[0, 1]$ 上有最大值，记为 $f(x_0)$，其中 $x_0 \in (0, 1)$。
+
+由拉格朗日微分中值定理，有
+\[
+\frac{f(x_0) - f(0)}{x_0} = f'(\xi_1), \quad \xi_1 \in (0, x_0);
+\]
+\[
+\frac{f(1) - f(x_0)}{1 - x_0} = f'(\xi_2), \quad \xi_2 \in (x_0, 1).
+\]
+
+即
+\[
+f'(\xi_1) = \frac{f(x_0)}{x_0}, \quad f'(\xi_2) = -\frac{f(x_0)}{1 - x_0}.
+\]
+
+于是
+\[
+\int_{0}^{1} \left| \frac{f''(x)}{f(x)} \right| \, \mathrm{d}x 
+\geq \int_{0}^{\xi_1} \left| \frac{f''(x)}{f(x)} \right| \, \mathrm{d}x + \int_{\xi_1}^{\xi_2} \left| \frac{f''(x)}{f(x)} \right| \, \mathrm{d}x + \int_{\xi_2}^{1} \left| \frac{f''(x)}{f(x)} \right| \, \mathrm{d}x.
+\]
+
+由拉格朗日中值定理，
+\[
+\int_{0}^{1} \left| \frac{f''(x)}{f(x)} \right| \, \mathrm{d}x \geq \frac{1}{f(x_0)} \left( \frac{f(x_0)}{x_0} + \frac{f(x_0)}{1 - x_0} \right).
+\]
+
+进一步化简得
+\[
+\int_{0}^{1} \left| \frac{f''(x)}{f(x)} \right| \, \mathrm{d}x \geq \frac{1}{x_0 (1 - x_0)}.
+\]
+
+当 $x_0 = \frac{1}{2}$ 时，$x_0(1 - x_0) = \frac{1}{4}$，从而
+\[
+\int_{0}^{1} \left| \frac{f''(x)}{f(x)} \right| \, \mathrm{d}x \geq 4.
+\]
+
+故得证。
+\end{proof}
+
+\subsubsection*{1.7.4}
+
+设函数 $f(x)$ 在 $[a, b]$ 上连续可导。试证：
+\[
+\max_{a \leq x \leq b} |f(x)| \leq \frac{1}{b-a} \left| \int_{a}^{b} f(x) \, \mathrm{d}x \right| + \int_{a}^{b} |f'(x)| \, \mathrm{d}x.
+\]
+\begin{proof}
+由于 $f(x)$ 在 $[a, b]$ 上连续，可设 $|f(\xi)| = \max_{a \leq x \leq b} |f(x)|, \xi \in [a, b]$ 及
+$|f(\eta)| = \min_{a \leq x \leq b} |f(x)|, \eta \in [a, b]$。于是
+\[
+\max_{a \leq x \leq b} |f(x)| - \min_{a \leq x \leq b} |f(x)| = |f(\xi)| - |f(\eta)| \leq |f(\xi) - f(\eta)|
+= \left| \int_{\eta}^{\xi} f'(x) \, \mathrm{d}x \right| \leq \int_{a}^{b} |f'(x)| \, \mathrm{d}x.
+\]
+
+另一方面，由积分中值定理，$\exists \zeta \in [a, b]$，使得
+\[
+f(\zeta) = \frac{1}{b-a} \int_{a}^{b} f(x) \, \mathrm{d}x,
+\]
+于是
+\[
+\min_{a \leq x \leq b} |f(x)| \leq |f(\zeta)| = \frac{1}{b-a} \left| \int_{a}^{b} f(x) \, \mathrm{d}x \right|.
+\]
+
+因此
+\[
+\max_{a \leq x \leq b} |f(x)| = \min_{a \leq x \leq b} |f(x)| + (\max_{a \leq x \leq b} |f(x)| - \min_{a \leq x \leq b} |f(x)|)
+\]
+\[
+\leq \frac{1}{b-a} \left| \int_{a}^{b} f(x) \, \mathrm{d}x \right| + \int_{a}^{b} |f'(x)| \, \mathrm{d}x.
+\]
+
+故得证。
+\end{proof}
+
+\subsubsection*{1.7.5}
+
+设函数 $f(x)$ 在 $[0, a]$ 上二阶连续可导 $(a > 0)$，且 $f''(x) \geq 0$。试证：
+\[
+\int_{0}^{a} f(x) \, \mathrm{d}x \geq a f\left(\frac{a}{2}\right).
+\]
+
+\begin{proof}
+将 $f(x)$ 在 $x = \frac{a}{2}$ 展开成 1 阶 Taylor 公式，有
+\[
+f(x) = f\left(\frac{a}{2}\right) + f'\left(\frac{a}{2}\right) \left(x - \frac{a}{2}\right) + \frac{1}{2} f''(\xi) \left(x - \frac{a}{2}\right)^2, \quad (0 < \xi < a).
+\]
+
+由 $f''(x) \geq 0$，得到
+\[
+f(x) \geq f\left(\frac{a}{2}\right) + f'\left(\frac{a}{2}\right) \left(x - \frac{a}{2}\right).
+\]
+
+对上述不等式两边从 $0$ 到 $a$ 积分，由于
+\[
+\int_{0}^{a} \left(x - \frac{a}{2}\right) \, \mathrm{d}x = 0,
+\]
+就得到
+\[
+\int_{0}^{a} f(x) \, \mathrm{d}x \geq a f\left(\frac{a}{2}\right).
+\]
+\end{proof}
+
+\subsubsection*{1.7.6}
+
+设函数 $f$ 在区间 $[-\pi, \pi]$ 上是凸函数，$f'(x)$ 在 $(-\pi, \pi)$ 内存在且有界。试证：
+\[
+\int_{-\pi}^{\pi} f(x) \cos((2n+1)x) \, \mathrm{d}x \leq 0.
+\]
+\begin{proof}
+由条件可知，$f'(x)$ 在 $[-\pi, \pi]$ 上必为一递增函数。
+
+即有
+\[
+\int_{-\pi}^{\pi} f(x) \cos((2n+1)x) \, \mathrm{d}x = -\frac{1}{2n+1} \int_{-\pi}^{\pi} f'(x) \sin((2n+1)x) \, \mathrm{d}x \geq 0.
+\]
+\end{proof}
+
+\subsubsection*{1.7.7}
+
+设函数 $f(x), g(x)$ 在区间 $[a, b]$ 上可积，试证：
+\[
+\left( \int_{a}^{b} f(x) g(x) \, \mathrm{d}x \right)^2 \leq \int_{a}^{b} f(x)^2 \, \mathrm{d}x \cdot \int_{a}^{b} g(x)^2 \, \mathrm{d}x.
+\]
+
+\begin{proof}
+设 $t$ 为实参数，则
+\[
+\int_{a}^{b} \left( f(x) + t g(x) \right)^2 \, \mathrm{d}x \geq 0,
+\]
+即
+\[
+\int_{a}^{b} g(x)^2 \, \mathrm{d}x \cdot t^2 + 2 \left[ \int_{a}^{b} f(x) g(x) \, \mathrm{d}x \right] t + \int_{a}^{b} f(x)^2 \, \mathrm{d}x \geq 0.
+\]
+
+令
+\[
+A = \int_{a}^{b} g(x)^2 \, \mathrm{d}x, \quad B = \int_{a}^{b} f(x) g(x) \, \mathrm{d}x, \quad C = \int_{a}^{b} f(x)^2 \, \mathrm{d}x,
+\]
+作为 $t$ 的一元二次不等式 $A t^2 + 2Bt + C \geq 0$，则必有 $B^2 - AC \leq 0$，即 $B^2 \leq AC$。
+
+因此
+\[
+\left( \int_{a}^{b} f(x) g(x) \, \mathrm{d}x \right)^2 \leq \int_{a}^{b} f(x)^2 \, \mathrm{d}x \cdot \int_{a}^{b} g(x)^2 \, \mathrm{d}x.
+\]
+\end{proof}
+
+\subsubsection*{1.7.8}
+
+设函数 $f(x), g(x)$ 在区间 $[a, b]$ 上可积，试证：
+\[
+\left( \int_{a}^{b} \left( f(x) + g(x) \right)^2 \, \mathrm{d}x \right)^{\frac{1}{2}} \leq 
+\left( \int_{a}^{b} f(x)^2 \, \mathrm{d}x \right)^{\frac{1}{2}} + \left( \int_{a}^{b} g(x)^2 \, \mathrm{d}x \right)^{\frac{1}{2}}.
+\]
+\begin{proof}
+由展开式
+\[
+\left( \left( \int_{a}^{b} f^2(x) \, \mathrm{d}x \right)^{\frac{1}{2}} + \left( \int_{a}^{b} g^2(x) \, \mathrm{d}x \right)^{\frac{1}{2}} \right)^2 
+\]
+\[
+= \int_{a}^{b} f^2(x) \, \mathrm{d}x + \int_{a}^{b} g^2(x) \, \mathrm{d}x + 2 \sqrt{\int_{a}^{b} f^2(x) \, \mathrm{d}x \cdot \int_{a}^{b} g^2(x) \, \mathrm{d}x}.
+\]
+
+根据 Cauchy-Schwarz 不等式，
+\[
+\sqrt{\int_{a}^{b} f^2(x) \, \mathrm{d}x \cdot \int_{a}^{b} g^2(x) \, \mathrm{d}x} \geq \left| \int_{a}^{b} f(x) g(x) \, \mathrm{d}x \right|.
+\]
+
+因此
+\[
+\left( \left( \int_{a}^{b} f^2(x) \, \mathrm{d}x \right)^{\frac{1}{2}} + \left( \int_{a}^{b} g^2(x) \, \mathrm{d}x \right)^{\frac{1}{2}} \right)^2 
+\geq \int_{a}^{b} f^2(x) \, \mathrm{d}x + \int_{a}^{b} g^2(x) \, \mathrm{d}x + 2 \int_{a}^{b} f(x) g(x) \, \mathrm{d}x.
+\]
+
+由此可得
+\[
+\left( \left( \int_{a}^{b} f^2(x) \, \mathrm{d}x \right)^{\frac{1}{2}} + \left( \int_{a}^{b} g^2(x) \, \mathrm{d}x \right)^{\frac{1}{2}} \right)^2 
+\geq \int_{a}^{b} \left( f(x) + g(x) \right)^2 \, \mathrm{d}x.
+\]
+
+两边取平方根，即得
+\[
+\left( \int_{a}^{b} \left( f(x) + g(x) \right)^2 \, \mathrm{d}x \right)^{\frac{1}{2}} 
+\leq \left( \int_{a}^{b} f^2(x) \, \mathrm{d}x \right)^{\frac{1}{2}} + \left( \int_{a}^{b} g^2(x) \, \mathrm{d}x \right)^{\frac{1}{2}}.
+\]
+\end{proof}
+
+\subsubsection*{1.7.9}
+
+求定积分
+\[
+I_n = \int_{0}^{\frac{\pi}{2}} \cos^n x \, \mathrm{d}x = \int_{0}^{\frac{\pi}{2}} \sin^n x \, \mathrm{d}x, \quad n = 0, 1, 2, \dots
+\]
+
+\begin{proof}
+首先证明等式
+\[
+\int_{0}^{\frac{\pi}{2}} \sin^n x \, \mathrm{d}x = \int_{0}^{\frac{\pi}{2}} \cos^n x \, \mathrm{d}x.
+\]
+
+设 $x = \frac{\pi}{2} - t$，则 $\mathrm{d}x = -\mathrm{d}t$，当 $x = 0$ 时，$t = \frac{\pi}{2}$；当 $x = \frac{\pi}{2}$ 时，$t = 0$。于是
+\[
+\int_{0}^{\frac{\pi}{2}} \sin^n x \, \mathrm{d}x = \int_{\frac{\pi}{2}}^{0} \sin^n \left( \frac{\pi}{2} - t \right) (-\mathrm{d}t)
+= \int_{0}^{\frac{\pi}{2}} \sin^n \left( \frac{\pi}{2} - t \right) \, \mathrm{d}t.
+\]
+由 $\sin\left(\frac{\pi}{2} - t\right) = \cos t$，得
+\[
+\int_{0}^{\frac{\pi}{2}} \sin^n x \, \mathrm{d}x = \int_{0}^{\frac{\pi}{2}} \cos^n t \, \mathrm{d}t = \int_{0}^{\frac{\pi}{2}} \cos^n x \, \mathrm{d}x.
+\]
+
+再由定积分分部积分公式，得
+\[
+I_n = \int_{0}^{\frac{\pi}{2}} \sin^n x \, \mathrm{d}x = \int_{0}^{\frac{\pi}{2}} \sin^{n-1} x \cdot \cos x \, \mathrm{d}x,
+\]
+令 $u = \sin^{n-1} x, v' = \cos x$，则 $u' = (n-1) \sin^{n-2} x \cos x$，$v = \sin x$，于是
+\[
+I_n = \sin^{n-1} x \sin x \Big|_{0}^{\frac{\pi}{2}} - \int_{0}^{\frac{\pi}{2}} \sin x \cdot (n-1) \sin^{n-2} x \cos x \, \mathrm{d}x.
+\]
+化简得
+\[
+I_n = (n-1) \int_{0}^{\frac{\pi}{2}} \sin^{n-2} x (1 - \sin^2 x) \, \mathrm{d}x,
+\]
+\[
+I_n = (n-1) \int_{0}^{\frac{\pi}{2}} \sin^{n-2} x \, \mathrm{d}x - (n-1) \int_{0}^{\frac{\pi}{2}} \sin^n x \, \mathrm{d}x.
+\]
+
+令 $\int_{0}^{\frac{\pi}{2}} \sin^{n-2} x \, \mathrm{d}x = I_{n-2}$，则
+\[
+I_n = (n-1) I_{n-2} - (n-1) I_n,
+\]
+\[
+I_n + (n-1) I_n = (n-1) I_{n-2},
+\]
+\[
+I_n = \frac{n-1}{n} I_{n-2}, \quad (n \geq 2).
+\]
+
+这个等式叫作积分 $I_n$ 关于下标 $n$ 的递推公式。如果将 $n$ 换成 $n-2$，则有
+\[
+I_{n-2} = \frac{n-3}{n-2} I_{n-4}.
+\]
+
+同样地依次进行下去，直到 $I_n$ 的下标递减到 $0$ 或 $1$ 为止，于是
+\[
+I_{2m} = \frac{2m-1}{2m} \cdot \frac{2m-3}{2m-2} \cdot \dots \cdot \frac{1}{2} \cdot I_0,
+\]
+\[
+I_{2m+1} = \frac{2m}{2m+1} \cdot \frac{2m-2}{2m-1} \cdot \dots \cdot \frac{2}{3} \cdot \frac{2}{1} \cdot I_1.
+\]
+
+其中当 $n = 0$ 时，$\sin^0 x = 1$，
+\[
+I_0 = \int_{0}^{\frac{\pi}{2}} \, \mathrm{d}x = \frac{\pi}{2}.
+\]
+
+因此，
+\[
+I_1 = \int_{0}^{\frac{\pi}{2}} \sin x \, \mathrm{d}x = -\cos x \Big|_{0}^{\frac{\pi}{2}} = 1.
+\]
+
+\[
+I_n = \int_{0}^{\frac{\pi}{2}} \sin^n x \, \mathrm{d}x = \frac{n-1}{n} \cdot \frac{n-3}{n-2} \cdot \frac{n-5}{n-4} \cdots \frac{5}{6} \cdot \frac{3}{4} \cdot \frac{1}{2} \cdot \frac{\pi}{2}, \quad n \text{ 是偶数};
+\]
+
+\[
+I_n = \int_{0}^{\frac{\pi}{2}} \sin^n x \, \mathrm{d}x = \frac{n-1}{n} \cdot \frac{n-3}{n-2} \cdot \frac{n-5}{n-4} \cdots \frac{6}{7} \cdot \frac{4}{5} \cdot \frac{2}{3} \cdot 1, \quad n \text{ 是奇数}.
+\]
+
+\end{proof}
+
+\subsubsection*{1.7.10}
+设 $(0, +\infty)$ 上的连续函数 $f(x)$ 满足
+\[
+f(x) = \ln x - \int_1^e f(x) \, dx,
+\]
+求
+\[
+I = \int_1^e f(x) \, dx.
+\]
+
+\begin{proof}
+记
+\[
+\int_{1}^{e} f(x) \, \mathrm{d}x = a,
+\]
+则 $f(x) = \ln x - a$，于是
+\[
+a = \int_{1}^{e} f(x) \, \mathrm{d}x = \int_{1}^{e} \ln x \, \mathrm{d}x - a (e - 1),
+\]
+所以
+\[
+a = \frac{1}{e} \int_{1}^{e} \ln x \, \mathrm{d}x = \frac{1}{e} \left( x \ln x - x \right) \Big|_{1}^{e} = \frac{1}{e}.
+\]
+\end{proof}
+
+
+
+\subsubsection*{1.7.11}
+设函数 $f(x)$ 连续且满足
+\[
+\int_0^1 t f(2x - t) \, dt = \frac{1}{2} \arctan x^2, \quad f(1) = 1.
+\]
+求
+\[
+I = \int_1^2 f(x) \, dx.
+\]
+
+\begin{proof}
+	由
+\[
+\int_{0}^{x} f(2x - t) \, \mathrm{d}t = \int_{x}^{2x} (2x - u) f(u) (-\mathrm{d}u),
+\]
+即
+\[
+\int_{0}^{x} f(2x - t) \, \mathrm{d}t = \int_{x}^{2x} (2x - u) f(u) \, \mathrm{d}u = 2x \int_{x}^{2x} f(u) \, \mathrm{d}u - \int_{x}^{2x} u f(u) \, \mathrm{d}u.
+\]
+
+得
+\[
+2x \int_{x}^{2x} f(u) \, \mathrm{d}u - \int_{x}^{2x} u f(u) \, \mathrm{d}u = \frac{1}{2} \arctan^2 x,
+\]
+等式两边对 $x$ 求导得
+\[
+2 \left[ 2x f(2x) + 2x \int_{x}^{2x} f(u) \, \mathrm{d}u - f(x) - 4x f(x) \right] + x f(x) = \frac{x}{1 + x^2},
+\]
+整理得
+\[
+2 \int_{x}^{2x} f(u) \, \mathrm{d}u - x f(x) = \frac{x}{1 + x^2}.
+\]
+
+取 $x = 1$ 得
+\[
+2 \int_{1}^{2} f(u) \, \mathrm{d}u - f(1) = \frac{1}{2},
+\]
+故
+\[
+\int_{1}^{2} f(x) \, \mathrm{d}x = \frac{3}{4}.
+\]
+
+\end{proof}
+
+\subsubsection*{1.7.12}
+设函数
+\[
+S(x) = \int_0^x |\cos t| \, dt,
+\]
+求
+\[
+\lim_{x \to +\infty} \frac{S(x)}{x}.
+\]
+
+\begin{proof}
+    设 $n\pi < x \leq (n+1)\pi, n$ 为正整数，则 $\frac{x}{n} \to \pi$ 当 $x \to +\infty$。由
+    \[
+    \int_0^{n\pi} |\cos x| \, dx = n, \quad \int_0^x |\cos x| \, dx = 2n \leq \int_{n\pi}^x |\cos x| \, dx \leq \int_{n\pi}^\infty |\cos x| \, dx = \pi,
+    \]
+    可知
+    \[
+    2n \leq S(x) \leq 2n + \pi.
+    \]
+    因此，得
+    \[
+    \frac{2n}{x} \leq \frac{S(x)}{x} \leq \frac{2n + \pi}{x}.
+    \]
+    当 $x \to +\infty$ 时，$\frac{2n}{x} \to 0$ 和 $\frac{2n + \pi}{x} \to 0$，从而
+    \[
+    \lim_{x \to +\infty} \frac{S(x)}{x} = \frac{2}{\pi}.
+    \]
+\end{proof}
+
+\subsubsection*{1.7.13}
+
+设函数 $f(x)$ 在 $(0,+\infty)$ 上连续，证明
+\[
+\int_1^4 f\left( \frac{x}{2} + \frac{2}{x} \right) \frac{\ln x}{x} \, dx = \ln 2 \int_1^4 f\left( \frac{x}{2} + \frac{2}{x} \right) \frac{1}{x} \, dx.
+\]
+
+\begin{proof}
+    令 $t = \frac{4}{x}$，则 $x = \frac{4}{t}$，$dx = -\frac{4}{t^2} dt$，于是
+    \[
+    \int_1^4 f\left( \frac{x}{2} + \frac{2}{x} \right) \ln \frac{x}{x} \, dx = \int_4^1 f\left( \frac{t}{2} + \frac{2}{t} \right) t \left( \ln 4 - \ln t \right) \left( -\frac{4}{t^2} \right) \, dt.
+    \]
+    \[
+    = \int_1^4 f\left( \frac{x}{2} + \frac{2}{x} \right) \ln 4 - \ln x \, dx
+    \]
+    所以
+    \[
+    \int_1^4 f\left( \frac{x}{2} + \frac{2}{x} \right) \ln \frac{x}{x} dx = (\ln 2) \int_1^4 f\left( \frac{x}{2} + \frac{2}{x} \right) \, dx.
+    \]
+\end{proof}
+
+\subsubsection*{1.7.14}
+
+设函数 $f(x)$ 在 $[0,1]$ 上有二阶连续导数，满足
+\[
+f(0) = f(1) = 0, \quad f'(0) = 0, \quad f'(1) = 1.
+\]
+试证
+\[
+\int_0^1 \left( f''(x) \right)^2 dx \geq 4,
+\]
+并指出不等式中等号成立的条件。
+
+\begin{proof}
+    构造一个三次多项式 $p(x)$，满足 $p(0) = p(1) = 0, p'(0) = 0, p'(1) = 1$。于是有
+    \[
+    p(x) = kx^2(x-1), \quad 1 = p'(1) = k \cdot 1 \cdot (1-1) = k, \quad \text{得} \quad p(x) = x^3 - x^2, \quad p'(x) = 3x^2 - 2x, 
+    \]
+    \[
+    \quad p''(x) = 6x - 2, \quad p^{(3)}(x) = 0.
+    \]
+    因此
+    \[
+    \int_0^1 [p''(x)]^2 dx = \int_0^1 (36x^2 - 24x + 4) dx = 12 - 12 + 4 = 4.
+    \]
+
+    当 $f(x) = x^3 - x^2$ 时，等号成立。考虑积分
+    \[
+    \int_0^1 \left( f''(x)^2 - [p''(x)]^2 \right) dx，
+    \]
+    有
+    \[
+    = \int_0^1 [f''(x) - p''(x)]^2 dx + 2 \int_0^1 f'(x) p^{(3)}(x) dx - 2 \int_0^1 p''(x) f^{(3)}(x) dx = 8
+    \]
+
+    所以
+    \[
+    \int_0^1 \left( f''(x) \right)^2 dx \geq \int_0^1 \left[ p''(x) \right]^2 dx = 4，
+    \]
+    且等号成立当 $f(x) = p(x)$ 时。再由 $f$ 与 $p$ 满足条件，得
+    \[
+    f(x) = p(x) = x^3 - x^2.
+    \]
+\end{proof}
+
+\subsubsection*{1.7.15}
+
+设函数 $f(x)$ 在 $[0,1]$ 上非负连续，且严格递增。对每个正整数 $n$，记
+\[
+F_n(x) = f(x)^n, \quad \text{设} \quad \theta_n \in [0,1] \quad \text{满足} \quad F_n(\theta_n) = \int_0^1 F_n(x) \, dx.
+\]
+证明
+\[
+\lim_{n \to \infty} \theta_n = 1.
+\]
+
+\begin{proof}
+    由条件， 对每个 $n, F_n(x)$ 在 $[0,1]$ 上也都是非负、严格递增的连续函数。
+
+    对 $\epsilon > 0$ ($\epsilon < \frac{1}{2}$)，因为
+    \[
+    0 \leq \frac{f(1 - 2\epsilon)}{f(1 - \epsilon)} < 1 \quad \Rightarrow \quad \lim_{n \to \infty} \left( \frac{f(1 - 2\epsilon)}{f(1 - \epsilon)} \right)^n = 0,
+    \]
+    所以存在 $N > 0$，当 $n > N$ 时，
+    \[
+    \left( \frac{f(1 - 2\epsilon)}{f(1 - \epsilon)} \right)^n = \frac{F_n(1 - 2\epsilon)}{F_n(1 - \epsilon)} < \epsilon.
+    \]
+    从而又有
+    \[
+    F_n(1 - 2\epsilon) < \epsilon F_n(1 - \epsilon) < \int_{1 - \epsilon}^1 F_n(x) \, dx < \int_0^1 F_n(x) \, dx = F_n(\theta_n).
+    \]
+    再由 $F_n(x)$ 为严格递增，得知 $n > N$ 时满足
+    \[
+    1 - 2\epsilon < \theta_n < 1.
+    \]
+    这就证明得
+    \[
+    \lim_{n \to \infty} \theta_n = 1.
+    \]
+\end{proof}
+
+% 第二部分：等距分划下的Riemann积分
+\newpage
+\section{第二部分：等距分划下的Riemann积分}
+
+% 2.1 黎曼积分的定义
+\subsection{黎曼积分的定义}
+设 $f$ 是定义在 $[a,b]$ 上的一个函数。如果存在一个实数 $I$，使得任意 $\epsilon > 0$，存在 $\delta > 0$，对于 $[a,b]$ 的任意一个分割
+\[
+P : a = x_0 < x_1 < \cdots < x_{n-1} < x_n = b,
+\]
+只要其宽度
+\[
+\|P\| = \max_{1 \leq k \leq n} \Delta x_k < \delta, \quad \text{此处} \quad \Delta x_k = x_k - x_{k-1}, \ k = 1,2,\cdots,n,
+\]
+那么，在每个子区间 $[x_{k-1},x_k]$ 上任取一点 $\xi_k$，都有
+\[
+\left| \sum_{k=1}^n f(\xi_k)\Delta x_k - I \right| < \epsilon,
+\]
+我们就说 $f$ 在 $[a,b]$ 上可积，称为 $f$ 在 $[a,b]$ 上的黎曼积分，简称积分，记为
+\[
+\lim_{\|P\| \to 0} \sum_{k=1}^n f(\xi_k)\Delta x_k = \int_a^b f(x)\, \mathrm{d}x = I.
+\]
+
+% 2.2 问题
+\subsection{问题}
+如果将上述定义中的分割 $P$ 改成对区间 $[a,b]$ 实行 $n$ 等分，即要求所有 $\Delta x_k$ 都相等，这样得出的可积性以及积分的定义与原来的定义是否等价？为什么？
+
+% 2.3 补充定义
+\subsection{可积的第一第二充要条件}
+
+% 2.3.1 等距分划
+\subsubsection*{等距分划}
+称点集 $P = \{x_0, x_1, \cdots, x_{n-1}, x_n\}$ 为 $[a, b]$ 的一个分割，如果满足条件：
+\[
+a = x_0 < x_1 < \cdots < x_{n-1} < x_n = b.
+\]
+记 $\Delta x_i = x_i - x_{i-1}, \ i = 1, \cdots, n$，并称 $\|P\| = \max_{1 \leq i \leq n} \{\Delta x_i\}$ 为分割 $P$ 的细度。
+
+如果 $\Delta x_i = \frac{b-a}{n}, \ i = 1, \cdots, n$，则称 $P$ 为\textbf{等距分划}。
+
+% 2.3.2 介点集与Riemann积分和
+\subsubsection*{介点集与Riemann积分和}
+设 $P = \{x_0, x_1, \cdots, x_{n-1}, x_n\}$ 为区间 $[a, b]$ 的一个分割。对每个子区间 $[x_{i-1}, x_i]$，任选 $\xi_i \in [x_{i-1}, x_i]$，则称 $\xi = \{\xi_i \mid i = 1, 2, \cdots, n\}$ 为从属于 $P$ 的一个 \textbf{介点集}；并称和式
+\[
+\sum_{i=1}^n f(\xi_i) \Delta x_i \quad \text{或} \quad \sum_P f(\xi_i) \Delta x_i
+\]
+为 $f$ 在区间 $[a, b]$ 上的一个 \textbf{Riemann（积分）和}。
+
+% 2.3.3 可积与定积分
+\subsubsection*{可积与定积分}
+设 $I$ 为实数，且有
+\[
+\lim_{\|P\| \to 0} \sum_{i=1}^n f(\xi_i) \Delta x_i = I,
+\]
+即 $\forall \epsilon > 0, \exists \delta > 0$，对 $\|P\| < \delta$ 的每个分割 $P$，以及对从属于 $P$ 的每个介点集 $\xi$，成立
+\[
+\left| \sum_{i=1}^n f(\xi_i) \Delta x_i - I \right| < \epsilon,
+\]
+则称函数 $f$ 在区间 $[a, b]$ 上 \textbf{Riemann 可积} 或简称 \textbf{可积}，记为
+\[
+f \in R[a, b],
+\]
+并称 $I$ 为 $f$ 在区间 $[a, b]$ 上的 \textbf{Riemann 积分} 或 \textbf{定积分}，简称积分，记为
+\[
+\int_a^b f(x) \, \mathrm{d}x = I, \quad \text{或其简化记号} \quad \int_a^b f = I.
+\]
+% 2.3.4 振幅与振幅面积
+\subsubsection*{振幅与振幅面积}
+为叙述可积的充分必要条件，需要引入以下概念。设函数 $f$ 在区间 $[a, b]$ 上有界，$P = \{x_0, x_1, \cdots, x_{n-1}, x_n\}$ 为 $[a, b]$ 的一个分割，对 $i = 1, \cdots, n$，记
+\[
+M_i = \sup\{f(x) \mid x \in [x_{i-1}, x_i]\} \quad \text{与} \quad m_i = \inf\{f(x) \mid x \in [x_{i-1}, x_i]\},
+\]
+称 $\omega_i = M_i - m_i$ 为 $f$ 在 $[x_{i-1}, x_i]$ 上的\textbf{振幅}，$\sum_{i=1}^n \omega_i \Delta x_i$ 为 $f$ 的\textbf{振幅面积}。
+% 2.3.5 可积的第一充分必要条件
+\subsubsection*{可积的第一充分必要条件}
+\textbf{命题2.3.5（可积的第一充分必要条件）}  
+
+有界函数 $f \in R[a, b]$ 的充分必要条件是
+\[
+\lim_{\|P\| \to 0} \sum_{i=1}^n \omega_i \Delta x_i = 0.
+\]
+% 2.3.6 可积的第二充分必要条件
+\subsubsection*{可积的第二充分必要条件}
+
+\textbf{命题 2.3.6（可积的第二充分必要条件）}  
+
+有界函数 $f \in R[a, b]$ 的充分必要条件是对每个 $\varepsilon > 0$，存在区间 $[a, b]$ 的一个分割 $P$，使成立
+\[
+\sum_P \omega_i \Delta x_i < \varepsilon.
+\]
+
+\textbf{这两个命题在许多教科书上都有具体的证明过程，在此不作证明直接使用。} 
+
+证明过程可详见参考文献\cite{key3}\cite{key4}
+
+% 2.4 证明
+\subsection{Riemann积分引理}
+
+\subsubsection*{引理叙述}
+设 $f \in R[a, b]$ 且
+\[
+\int_a^b f = I,
+\]
+其充分必要条件是存在 $[a, b]$ 的一个分割序列 $\{P_k\}_{k \in \mathbb{N}_+}$，满足条件
+\[
+\lim_{k \to \infty} \|P_k\| = 0,
+\]
+使得
+\[
+\lim_{k \to \infty} \sum_{i=1}^{n_k} f(\xi_{k, i}) \Delta x_{k, i} = I,
+\]
+且极限值不依赖于介点集的选取。
+
+\subsubsection*{引理证明}
+必要性显然，下面证明充分性。
+
+既然极限值不依赖于介点集的选取，那么我们有
+\[
+\lim_{k \to \infty} \sum_{i=1}^{n_k} \left( \sup_{(\xi_{k, i} \in [x_{k, i-1}, x_{k, i}])} f(\xi_{k, i}) \right) \Delta x_{k, i}
+= \lim_{k \to \infty} \sum_{i=1}^{n_k} \left( \inf_{(\xi_{k, i} \in [x_{k, i-1}, x_{k, i}])} f(\xi_{k, i}) \right) \Delta x_{k, i} = I.
+\]
+两者相减得到
+\[
+\lim_{k \to \infty} \sum_{i=1}^{n_k} \omega_i \Delta x_{k, i} = 0,
+\]
+其中 $\omega_i = M_i - m_i$ 表示 $f$ 在 $[x_{k, i-1}, x_{k, i}]$ 上的振幅。
+
+故根据可积的第一充分必要条件，$f \in R[a, b]$。由于
+\[
+\lim_{k \to \infty} \sum_{i=1}^{n_k} f(\xi_{k, i}) \Delta x_{k, i} = I,
+\]
+根据积分函数点集选取的任意性性质，有
+\[
+\int_a^b f(x) \, \mathrm{d}x = I.
+\]
+
+% 2.5 解答问题2.2
+\subsection{问题2.2解答}
+
+\subsubsection*{问题描述}
+如果将黎曼积分定义中的分割 $P$ 改成对区间 $[a, b]$ 进行 $n$ 等分，即所有 $\Delta x_k$ 相等，这样得出的可积性以及积分的定义是否与原定义等价？为什么？
+
+\subsubsection*{问题解答}
+引理2.4.1表明Riemann积分的定义中分划的任意性要求可以降低，例如等距分划也是可以的。\cite{key1}
+对于任意一个函数 $f$，若其在 $[a, b]$ 上 Riemann 可积，则对于任意分割序列 $\{P_k\}$，只要 $\|P_k\| \to 0$，都可以得出相同的积分值。因此，将分割改为等距分划不会改变函数的可积性以及积分值。
+
+具体而言，设 $P_k$ 为等距分割，每个子区间长度为
+\[
+\Delta x = \frac{b-a}{n_k},
+\]
+根据 Riemann 积分定义，当 $n_k \to \infty$ 时，仍满足
+\[
+\lim_{n_k \to \infty} \sum_{i=1}^{n_k} f(\xi_{k, i}) \Delta x = \int_a^b f(x) \, \mathrm{d}x.
+\]
+
+因此，等距分划定义的黎曼积分与原定义等价。
+
+
+\clearpage
+\section{第三部分：离散动力系统的混沌现象}
+
+\subsection{周期点、周期轨道与不动点}
+
+假设 $I$ 是一个区间，函数 $f: I \to I$。对任意 $x \in I$，我们规定
+\[
+f^0(x) = x, \quad f^1(x) = f(x), \quad f^{n+1}(x) = f(f^n(x)), \quad n = 1, 2, 3, \cdots.
+\]
+这样得到的函数 $f^n: I \to I$ 称为 $f$ 的第 $n$ 次迭代（$n = 0, 1, 2, \cdots$）。显然，$f^0$ 就是恒等映射，$f^1$ 就是 $f$ 自身。
+
+对给定的 $x \in I$，我们考虑点列
+\[
+x, \, f(x), \, f^2(x), \, \cdots.
+\]
+如果有正整数 $m$ 使得 $f^m(x) = x$，则 $x$ 称为 $f$ 的一个\textbf{周期点}，把 $m$ 称为 $x$ 的\textbf{一个周期}。
+
+如果 $x$ 的最小周期是 $n$，则称 $x$ 是 $f$ 的一个$\mathbf{n-}$ \textbf{周期点}。这时点列
+\[
+x, \, f(x), \, f^2(x), \, \cdots, \, f^{m-1}(x)
+\]
+是由 $n$ 个互不相同的点组成的有限数列，称为 $x$ 的 $\mathbf{n-}$ \textbf{周期轨道}。
+
+$f$ 的 $1$ 周期点也称为 $f$ 的\textbf{不动点}。
+
+\subsection{问题}
+
+\subsubsection{问题1（Brouwer 不动点定理）}
+
+证明：如果 $I$ 是一个闭区间，$f: I \to I$ 连续，则 $f$ 必有不动点。
+
+\subsubsection{问题2（构造2-周期点函数）}
+
+试构造一个 $[0, 1]$ 上的连续函数，使得 $f$ 有 2-周期点。
+
+\subsubsection{问题3（构造3-周期点函数）}
+
+试构造一个 $[0, 1]$ 上的连续函数，使得 $f$ 有 3-周期点。
+
+\subsubsection{问题4（Li-Yorke 定理）}
+
+证明：如果 $f: I \to I$ 连续，且有 3-周期点，那么对任意正整数 $n$，$f$ 必有 $n$-周期点。
+
+\subsection{两个补充定理}
+
+\subsubsection{零点存在定理}
+
+设 $f \in C[a, b]$，并满足条件 $f(a)f(b) < 0$，则存在点 $\xi \in (a, b)$ 使得 $f(\xi) = 0$。
+
+\subsubsection{介值定理}
+
+区间上的连续函数的值域必是区间（可缩为一点）。
+
+\textbf{这两个定理在许多教科书上都有具体的证明方法，在此直接使用不作证明}。详细证明过程在参考文献\cite{key5}。
+
+\subsection{问题解答}
+
+\subsubsection*{3.4.1  问题1解答}
+
+这是著名的Brouwer（布劳威尔）不动点定理的特例，下面给出一种证明。
+
+原问题：如果 $I$ 是一个闭区间，$f: I \to I$ 连续，则 $f$ 必有不动点等价于以下命题
+
+\textbf{Brouwer 不动点定理}
+如果 $I = [a, b] \subseteq \mathbb{R}$，并且 $f: I \to I$ 是连续函数，那么 $f$ 至少有一个不动点。\cite{key8}
+
+
+\textbf{解：} 
+如果 $f(a) = a$ 或 $f(b) = b$，那么命题显然成立。否则，$f(a) > a$ 且 $f(b) < b$。
+
+定义一个辅助函数：
+\[
+g(x) = f(x) - x, \quad x \in [a, b].
+\]
+显然，$g(a) = f(a) - a > 0$，而 $g(b) = f(b) - b < 0$。
+
+又因为 $f$ 是连续函数，故 $g(x)$ 也是 $[a, b]$ 上的连续函数。因此，根据介值定理（Intermediate Value Theorem），存在 $x^* \in (a, b)$，使得
+\[
+g(x^*) = 0.
+\]
+由 $g(x^*) = f(x^*) - x^* = 0$ 可得
+\[
+f(x^*) = x^*.
+\]
+因此，$x^*$ 是 $f$ 的不动点。命题得证。
+
+从而原问题 “如果 $I = [a, b] \subseteq \mathbb{R}$，并且 $f: I \to I$ 是连续函数，那么 $f$ 至少有一个不动点” 得证。\qed 
+
+\subsubsection*{3.4.2  问题2解答}
+
+原问题：试构造一个 $[0, 1]$ 上的连续函数，使得 $f$ 有 2-周期点。
+
+\textbf{解：} 
+构造函数 $f(x) = x^2 - 1$  
+
+点 $x_0 = -1$ 是函数 $f(x) = x^2 - 1$ 的一个周期为 2 的2-周期点，因为
+\[
+f(-1) = 0 \quad \text{且} \quad f^2(-1) = -1.
+\]
+同样地，$x_0 = 0$ 也是函数 $f(x)$ 的一个周期为 2 的2-周期点。\qed 
+
+\subsubsection*{3.4.3 问题3解答}
+
+原问题：试构造一个 $[0, 1]$ 上的连续函数，使得 $f$ 有 3-周期点。
+
+\textbf{解：} 
+构造函数 $f(x) = 1 - \frac{1}{2}x - \frac{3}{2}x^2$
+
+点 $x_0 = 1$ 是函数 $f(x) = 1 - \frac{1}{2}x - \frac{3}{2}x^2$ 的一个周期为 3 的3-周期点，因为
+\[
+f(1) = -1, \quad f^2(1) = 0, \quad \text{且} \quad f^3(1) = 1.
+\]\qed 
+
+\subsubsection*{3.4.4  问题4解答}
+
+这是中国台湾数学家李天岩和美国数学家Yorke, J.A.于1975年发表在《美国数学月刊》的论文《周期3蕴涵混沌》（《Period three implies chaos》)提出。被普遍称为Li-Yorke Theorem，是Sharkovsky 定理的一种特殊变形，下面给出两种证明方法。
+
+问题：如果 $f: I \to I$ 连续，且有 3-周期点，那么对任意正整数 $n$，$f$ 必有 $n$-周期点。
+
+\textbf{方法一}
+\begin{proof}
+设 $x_1$ 是周期为 3 的点，且 $f(x_1) = x_2$ 和 $f(x_2) = x_3$。假设 $x_1 < x_2 < x_3$（其他可能的排列方式可采用类似的证明）。令
+\[
+I_1 = [x_1, x_2], \quad I_2 = [x_2, x_3].
+\]
+那么有
+\[
+f(I_1) = I_2, \quad f(I_2) = I_1 \cup I_2.
+\]
+由于 $I_2 \to I_2$，区间 $I_2$ 中存在一个不动点 $p_1$（周期为 1）。同时有 $I_1 \to I_2 \to I_1$，这意味着在 $I_1$ 中存在一个周期为 2 的周期点 $p_2$。这两个点显然与 $x_1, x_2, x_3$ 不同，因为它们的周期小于 3。
+
+此外，对于任意给定的整数 $n > 3$，可以构造以下序列：
+\[
+I_1 \to I_2 \to I_2 \to \cdots \to I_2 \to I_1,
+\]
+其中区间 $I_2$ 出现了 $n-1$ 次。
+
+这表明在 $I_1$ 中存在一个周期为 $n$ 的点 $p_n$，其满足以下条件：
+\[
+f^n(p_n) = p_n, \quad f^i(p_n) \in I_2 \quad \text{对于所有 } 0 < i \leq n-1.
+\]
+注意，$p_n \neq x_2$，因为 $f^2(x_2) \in I_1 \setminus I_2$。因此，
+\[
+f^i(p_n) \neq p_n \quad \text{对于所有 } 0 < i \leq n-1,
+\]
+这表明 $p_n$ 的周期正好为 $n$。
+
+\end{proof}
+
+\textbf{方法二}
+\begin{proof}
+
+\textbf{引理 1(其实为问题1）}设函数 $f: I \to I$ 连续，且 $J = [a, b] \subset I$。如果 $f(J) \subset J$，那么 $f$ 在 $J$ 上有一个不动点。
+
+\textbf{解：} 由于 $f(J) \subset J$，可以找到 $c, d \in J$，使得 $f(c) = a$ 以及 $f(d) = b$。若 $c = a$ 或 $d = b$，那么 $a$ 或 $b$ 就是 $f$ 的不动点。如果不是这样，则说明 $c > a$ 且 $d < b$。这时，连续函数 $\varphi(x) = f(x) - x$ 满足
+\[
+\varphi(c) = f(c) - c = a - c < 0, \quad \varphi(d) = f(d) - d = b - d > 0.
+\]
+因此由零值定理可知，$\varphi$ 在 $c$ 与 $d$ 之间必有一个零点，这一点正是 $f$ 的不动点。
+\qed
+
+\textbf{引理 2} 设函数 $f: I \to I$ 连续，$J_1, J_2$ 是 $I$ 的两个闭子区间。如果 $f(J_1) \supset J_2$，那么必存在 $J_1$ 的闭子区间 $K$，使得 $f(K) = J_2$。
+
+\textbf{解：} 设 $J_1 = [a, b], J_2 = [U, V]$，由于 $f(J_1) \supset J_2$，必存在 $u, v \in [a, b]$，使得 $f(u) = U, f(v) = V$。不妨设 $u < v$（$u > v$ 的情形可类似处理）。令
+\[
+E = \{s : f(s) = U, \, u \leq s \leq v \}.
+\]
+因为 $f(u) = U$，故 $E$ 为非空集且有上界，因此 $E$ 必有上确界。记 $u^* = \sup E$，我们证明 $f(u^*) = U$。由上确界的定义知，对于任意的正整数 $n$，必有 $s_n \in E$，使得
+\[
+u^* - \frac{1}{n} < s_n \leq u^*.
+\]
+由此可得 $\lim s_n = u^*$。由于 $s_n \in E$，故 $f(s_n) = U$。令 $n \to \infty$，并利用 $f$ 的连续性，即得 $f(u^*) = U$。这就证明了 $u^* \in E$，而且 $u^* \neq v$（因为 $f(v) = V$）。有了 $u^*$ 之后，可以定义
+\[
+F = \{t : f(t) = V, \, u^* < t \leq v\}.
+\]
+$F$ 当然有下确界，记 $v^* = \inf F$。同理可证 $f(v^*) = V$。由此可知 $u^* \neq v^*$。记
+\[
+K = [u^*, v^*].
+\]
+那么对于任意的 $x \in (u^*, v^*)$，由于 $x > u^*$，必有 $f(x) \neq U$；又因 $x < v^*$，必有 $f(x) \neq V$，故由介值定理，对任意的 $\eta \in (U, V)$，必有 $\xi \in [u^*, v^*]$，使得 $f(\xi) = \eta$。这就证明了
+
+\begin{equation}
+f([u^*, v^*]) \supset [U, V]. \tag{1}
+\end{equation}
+
+为了证明 $f([u^*, v^*]) \subset [U, V]$，必须证明：对任意的 $x < U$（或 $x > V$），不可能存在 $s \in [u^*, v^*]$，使得 $f(s) = x$。如果有这样的 $x$，我们再取一点 $x' \in (U, V)$。根据式(1)，存在 $s' \in [u^*, v^*]$，使得 $f(s') = x'$，那么由于 $f(s') = x'$，而且 $x < U < x'$，故由介值定理，必有 $\xi$ 介于 $s'$ 与 $s$ 之间，使得 $f(\xi) = U$。由于 $\xi$ >$ U$，这是不可能的。这就证明了
+\begin{equation}
+f([u^*, v^*]) \subset [U, V]. \tag{2}
+\end{equation}
+
+综合式（1）与（2），即得 $f(K) = [U, V]$。
+\qed
+
+\textbf{引理 3} 设函数 $f: I \to I$ 连续，$J_0, J_1, \cdots, J_{n-1}$ 是 $I$ 的 $n$ 个闭子区间。
+
+如果
+\[
+f(J_0) \supset J_1, \, f(J_1) \supset J_2, \, \cdots, \, f(J_{n-2}) \supset J_{n-1}, \, f(J_{n-1}) \supset J_0,
+\]
+那么：
+
+\quad（1）存在 $x_0 \in J_0$，使得 $f^n(x_0) = x_0$；
+
+\quad（2）$f(x_0) \in J_1, \, f^2(x_0) \in J_2, \, \cdots, \, f^{n-1}(x_0) \in J_{n-1}$。
+
+用一句通俗的话来说，当 $j$ 从 $0$ 跑过 $1, 2, \cdots, n-1$ 时，$f(x_0)$ 依次地“拜访” $J_0, J_1, \cdots, J_{n-1}$，最后仍然回到 $x_0$。
+
+\textbf{解：} 因为 $f(J_{n-1}) \supset J_0$，由引理2 知，有一个闭子区间 $K_{n-1} \subset J_{n-1}$，使得 $f(K_{n-1}) = J_0$。类似地，因 $f(J_{n-2}) \supset J_{n-1} \supset K_{n-1}$，又可以找到一个闭子区间 $K_{n-2} \subset J_{n-2}$，使得 $f(K_{n-2}) = K_{n-1}$。同理，可以找到一个闭子区间 $K_1 \subset J_1$，使得 $f(K_1) = K_2$。最后，存在在 $J_0$ 的闭子区间 $K_0$，使得 $f(K_0) = K_1$。
+
+因此，我们看到
+\[
+\begin{array}{l}
+f(K_0) = K_1, \\
+f^2(K_0) = K_2, \\
+f^3(K_0) = K_3, \\
+\vdots \\
+f^{n-1}(K_0) = K_{n-1}, \\
+f^n(K_0) = f(K_{n-1}) = J_0 \supset K_0.
+\end{array}
+\]
+对函数 $f^n$ 运用引理1，我们可以找到一点 $x_0 \in K_0 \subset J_0$，使得 $f^n(x_0) = x_0$。很显然，我们有 $f^k(x_0) \in K_k \subset J_k \ (k = 1, 2, \cdots, n-1)$。因此，引理3得证。
+\qed 
+
+\quad \textbf{现在可以来证明问题4。}
+
+根据假定，设 $\eta$ 是 $f$ 的一个 3 周期点，那么 $\eta, f(\eta), f^2(\eta)$ 构成 $\eta$ 的 3 周期轨。不妨设
+\[
+\eta < f(\eta) < f^2(\eta).
+\]
+为简单起见，设 $a = \eta, \beta = f(\eta), \gamma = f^2(\eta)$，于是有
+\[
+f(a) = \beta, \, f(\beta) = \gamma, \, f(\gamma) = a.
+\]
+记 $H = [a, \beta], K = [\beta, \gamma]$。由于 $f(a) = \beta, f(\beta) = \gamma$，故由介值定理，知
+\begin{equation}
+f(H) \supset K. \tag{3}
+\end{equation}
+
+又因 $f(\beta) = \gamma, f(\gamma) = a$，仍由介值定理，知
+\begin{equation}
+f(K) \supset [a, \gamma] = H \cup K. \tag{4}
+\end{equation}
+
+现在来证明，对于任意的 $n \in \mathbb{N}^*$，$f^n$ 必有 n 周期点。当 $n = 1$ 时，由式 (4)，知 $f(K) \supset K$，故由引理 1，$f$ 在 $K$ 上有一个不动点，即 1 周期点。再设 $n = 2$，由式 (4)，知
+\[
+f(K) \supset H.
+\]
+由式 (3)，知 $f(H) \supset K$。于是由引理 3 知，存在一点 $x_0 \in K$，使得
+\[
+f^2(x_0) = x_0, \, f(x_0) \in H.
+\]
+我们证明 2 是 $x_0$ 的最小周期。若 $f(x_0) = x_0$，那么 $x_0 \in H \cap K = \{\beta\}$，即 $x_0 = \beta$，这就导致
+\[
+f(x_0) = f(\beta) = \gamma > \beta = x_0.
+\]
+的矛盾。现设 $n > 3$，记
+\[
+J_0 = J_1 = \cdots = J_{n-2} = K, \, J_{n-1} = H.
+\]
+从式 (4)，知 $f(J_j) \supset J_{j+1} \ (j = 0, 1, \cdots, n-2)$。又从式 (3)，有 $f(J_{n-1}) \supset J_0$，即引理 3 的要求都满足。因此有一点 $x_0 \in J_0 = K$，使得$f^n(x_0) = x_0$,且
+\begin{equation}
+f^j(x_0) \in J_j \quad (j = 1, 2, \cdots, n-1).\tag{5}
+\end{equation}
+
+现在证明 $n$ 是 $x_0$ 的最小周期。否则，存在 $k < n$，使得 $f^k(x_0) = x_0$，于是 $x_0, f(x_0), \cdots, f^{k-1}(x_0)$ 构成 $x_0$ 的 k 周期轨。由于 $n > 1 \Rightarrow n > 2 \Rightarrow k - 1$，所以 $f^{n-1}(x_0)$ 必是
+\[
+x_0, f(x_0), \cdots, f^{n-2}(x_0)
+\]
+中的一个。由式 (5) 知，它们都在 $K$ 中。但是 $f^{n-1}(x_0) \in J_{n-1} = H$。这说明 $f^{n-1}(x_0) \in K \cap H = \{\beta\}$，因此 $x_0 = f^{n}(x_0) = f(\beta) = \gamma$，而
+\[
+a = f(\gamma) = f(x_0) = f(\beta) = \gamma \Rightarrow K = [\beta, \gamma].
+\]
+这是不可能的。
+
+这样就完全证明了问题4。
+
+\end{proof}
+
+\quad Li-Yorke定理告诉我们，看似简单的映射可能表现出非常复杂的动态行为。反之，也存在一些情形，映射表现得极为简单。
+% 文献部分
+
+\newpage 
+% 修改标题为“参考文献”
+\addcontentsline{toc}{section}{参考文献}
+\nocite{*}
+
+% Print all references, whether cited or not
+\printbibliography
+
+\end{document} 
